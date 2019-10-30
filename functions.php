@@ -1,6 +1,9 @@
 <?php
 add_action( 'wp_enqueue_scripts', 'enqueue_parent_styles' );
 
+define( 'REHUB_CHILD_DIR', dirname( __FILE__ ) );
+require_once REHUB_CHILD_DIR . '/seller-services/functions.php';
+
 function enqueue_parent_styles() {
    wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
 }
@@ -30,7 +33,7 @@ function save_extra_fields( $store_id ) {
 	$dokan_settings['address']['country'] = 'EE';
     $dokan_settings['live_chat'] = 'yes';
     $dokan_settings['dokan_store_time_enabled'] = 'yes';
- update_user_meta( $store_id, 'dokan_profile_settings', $dokan_settings );
+    update_user_meta( $store_id, 'dokan_profile_settings', $dokan_settings );
 }
 
 
@@ -220,58 +223,6 @@ function set_vendor_settings_help_texts() {
 
 
 
-
-
-
-
-add_filter( 'dokan_query_var_filter', 'dokan_load_document_menu', 100 );
-function dokan_load_document_menu( $query_vars ) {
-	$query_vars['help'] = 'help';
-	return $query_vars;
-}
-add_filter( 'dokan_get_dashboard_nav', 'dokan_add_help_menu', 100 );
-function dokan_add_help_menu( $urls ) {
-	$urls['help'] = array(
-		'title' => __( 'Help', 'dokan'),
-		'icon'  => '<i class="fa fa-user"></i>',
-		'url'   => dokan_get_navigation_url( 'settings/store' ),
-		'pos'   => 51
-	);
-	return $urls;
-}
-
-//add_action( 'dokan_load_custom_template', 'dokan_load_template' );
-//function dokan_load_template( $query_vars ) {
-//	if ( isset( $query_vars['help'] ) ) {
-//		require_once dirname( __FILE__ ). '/store-custom-form.php';
-//	}
-//}
-
-add_action( 'dokan_render_settings_content', 'dokan_load_template', 100 );
-function dokan_load_template($query_vars) {
-	global $wp;
-	if ( isset( $query_vars['help'] ) ) {
-//		Dokan_Template_Settings::init()->load_store_content();
-//		require_once dirname( __FILE__ ). '/store-custom-form.php';
-		load_store_content();
-	}
-}
-
-function load_store_content() {
-
-	error_log('load store content');
-
-	$validate     = Dokan_Template_Settings::init()->validate();
-	$currentuser  = dokan_get_current_user_id();
-	$profile_info = dokan_get_store_info( dokan_get_current_user_id() );
-
-	dokan_get_template_part( 'settings/store-form.php', '', array(
-		'current_user' => $currentuser,
-		'profile_info' => $profile_info,
-		'validate'     => $validate,
-	) );
-
-}
 
 
 ?>
