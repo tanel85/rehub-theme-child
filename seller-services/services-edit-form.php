@@ -28,20 +28,6 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 <form method="post" id="services-form"  action="" class="dokan-form-horizontal">
 	<?php wp_nonce_field( 'vendor_services_nonce' ); ?>
 
-	<header class="dokan-dashboard-header" style="text-align:left;">
-		<h1 class="entry-title"><span><?php esc_attr_e( 'Services', 'dokan-lite' ); ?></span></h1>
-	</header>
-
-	<?php
-	if ( isset( $_GET['message'] ) && $_GET['message'] == 'profile_saved' ) {
-		dokan_get_template_part('global/dokan-success', '', array( 'message' => __( 'Your information has been saved successfully2', 'dokan-lite' ) ) );
-	}
-	?>
-
-    <div class="dokan-ajax-response">
-		<?php do_action( 'dokan_settings_load_ajax_response' ); ?>
-    </div>
-
     <div class="dokan-form-group service-group">
         <label class="dokan-w3 control-label" for="">
 			<?php esc_html_e( 'Food options', 'dokan-lite' ); ?>
