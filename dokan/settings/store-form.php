@@ -9,17 +9,13 @@
 $gravatar_id    = ! empty( $profile_info['gravatar'] ) ? $profile_info['gravatar'] : 0;
 $banner_id      = ! empty( $profile_info['banner'] ) ? $profile_info['banner'] : 0;
 $storename      = isset( $profile_info['store_name'] ) ? $profile_info['store_name'] : '';
-$store_ppp      = isset( $profile_info['store_ppp'] ) ? $profile_info['store_ppp'] : '';
 $phone          = isset( $profile_info['phone'] ) ? $profile_info['phone'] : '';
-$show_email     = isset( $profile_info['show_email'] ) ? $profile_info['show_email'] : 'no';
-$show_more_ptab = isset( $profile_info['show_more_ptab'] ) ? $profile_info['show_more_ptab'] : 'yes';
 
 $address         = isset( $profile_info['address'] ) ? $profile_info['address'] : '';
 $address_street1 = isset( $profile_info['address']['street_1'] ) ? $profile_info['address']['street_1'] : '';
-$address_street2 = isset( $profile_info['address']['street_2'] ) ? $profile_info['address']['street_2'] : '';
 $address_city    = isset( $profile_info['address']['city'] ) ? $profile_info['address']['city'] : '';
 $address_zip     = isset( $profile_info['address']['zip'] ) ? $profile_info['address']['zip'] : '';
-$address_country = isset( $profile_info['address']['country'] ) ? $profile_info['address']['country'] : '';
+$address_country = 'EE';
 $address_state   = isset( $profile_info['address']['state'] ) ? $profile_info['address']['state'] : '';
 
 $map_location   = isset( $profile_info['location'] ) ? $profile_info['location'] : '';
@@ -41,7 +37,7 @@ if ( is_wp_error( $validate ) ) {
 	$address_street2 = sanitize_text_field( $posted_address['street_2'] );
 	$address_city    = sanitize_text_field( $posted_address['city'] );
 	$address_zip     = sanitize_text_field( $posted_address['zip'] );
-	$address_country = sanitize_text_field( $posted_address['country'] );
+	$address_country = 'EE';
 	$address_state   = sanitize_text_field( $posted_address['state'] );
 }
 
@@ -384,90 +380,7 @@ $delivery = isset( $profile_info['delivery'] ) ? $profile_info['delivery'] : '';
         });
         // dokan store open close scripts end //
 
-        var dokan_address_wrapper = $( '.dokan-address-fields' );
-        var dokan_address_select = {
-            init: function () {
-                var savedState = '<?php echo esc_html( $address_state ); ?>';
-
-                if ( ! savedState || 'N/A' === savedState ) {
-                    $('#dokan-states-box').hide();
-                }
-
-                dokan_address_wrapper.on( 'change', 'select.country_to_state', this.state_select );
-            },
-            state_select: function () {
-                var states_json = wc_country_select_params.countries.replace( /&quot;/g, '"' ),
-                    states = $.parseJSON( states_json ),
-                    $statebox = $( '#dokan_address_state' ),
-                    input_name = $statebox.attr( 'name' ),
-                    input_id = $statebox.attr( 'id' ),
-                    input_class = $statebox.attr( 'class' ),
-                    value = $statebox.val(),
-                    selected_state = '<?php echo esc_attr( $address_state ); ?>',
-                    input_selected_state = '<?php echo esc_attr( $address_state ); ?>',
-                    country = $( this ).val();
-
-                if ( states[ country ] ) {
-
-                    if ( $.isEmptyObject( states[ country ] ) ) {
-
-                        $( 'div#dokan-states-box' ).slideUp( 2 );
-                        if ( $statebox.is( 'select' ) ) {
-                            $( 'select#dokan_address_state' ).replaceWith( '<input type="text" class="' + input_class + '" name="' + input_name + '" id="' + input_id + '" required />' );
-                        }
-
-                        $( '#dokan_address_state' ).val( 'N/A' );
-
-                    } else {
-                        input_selected_state = '';
-
-                        var options = '',
-                            state = states[ country ];
-
-                        for ( var index in state ) {
-                            if ( state.hasOwnProperty( index ) ) {
-                                if ( selected_state ) {
-                                    if ( selected_state == index ) {
-                                        var selected_value = 'selected="selected"';
-                                    } else {
-                                        var selected_value = '';
-                                    }
-                                }
-                                options = options + '<option value="' + index + '"' + selected_value + '>' + state[ index ] + '</option>';
-                            }
-                        }
-
-                        if ( $statebox.is( 'select' ) ) {
-                            $( 'select#dokan_address_state' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
-                        }
-                        if ( $statebox.is( 'input' ) ) {
-                            $( 'input#dokan_address_state' ).replaceWith( '<select type="text" class="' + input_class + '" name="' + input_name + '" id="' + input_id + '" required ></select>' );
-                            $( 'select#dokan_address_state' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
-                        }
-                        $( '#dokan_address_state' ).removeClass( 'dokan-hide' );
-                        $( 'div#dokan-states-box' ).slideDown();
-
-                    }
-                } else {
-
-
-                    if ( $statebox.is( 'select' ) ) {
-                        input_selected_state = '';
-                        $( 'select#dokan_address_state' ).replaceWith( '<input type="text" class="' + input_class + '" name="' + input_name + '" id="' + input_id + '" required="required"/>' );
-                    }
-                    $( '#dokan_address_state' ).val(input_selected_state);
-
-                    if ( $( '#dokan_address_state' ).val() == 'N/A' ){
-                        $( '#dokan_address_state' ).val('');
-                    }
-                    $( '#dokan_address_state' ).removeClass( 'dokan-hide' );
-                    $( 'div#dokan-states-box' ).slideDown();
-                }
-            }
-        }
-
         $(function() {
-            dokan_address_select.init();
 
             $('#setting_phone').keydown(function(e) {
                 // Allow: backspace, delete, tab, escape, enter and .
@@ -485,120 +398,6 @@ $delivery = isset( $profile_info['delivery'] ) ? $profile_info['delivery'] : '';
                     e.preventDefault();
                 }
             });
-			<?php
-			$locations = explode( ',', $map_location );
-			$def_lat = isset( $locations[0] ) ? $locations[0] : 90.40714300000002;
-			$def_long = isset( $locations[1] ) ? $locations[1] : 23.709921;
-			?>
-            var def_zoomval = 12;
-            var def_longval = '<?php echo esc_attr( $def_long ); ?>';
-            var def_latval = '<?php echo esc_attr( $def_lat ); ?>';
-
-            try {
-                var curpoint = new google.maps.LatLng(def_latval, def_longval),
-                    geocoder   = new window.google.maps.Geocoder(),
-                    $map_area = $('#dokan-map'),
-                    $input_area = $( '#dokan-map-lat' ),
-                    $input_add = $( '#dokan-map-add' ),
-                    $find_btn = $( '#dokan-location-find-btn' );
-
-                $find_btn.on('click', function(e) {
-                    e.preventDefault();
-
-                    geocodeAddress( $input_add.val() );
-                });
-
-                var gmap = new google.maps.Map( $map_area[0], {
-                    center: curpoint,
-                    zoom: def_zoomval,
-                    mapTypeId: window.google.maps.MapTypeId.ROADMAP
-                });
-
-                var marker = new window.google.maps.Marker({
-                    position: curpoint,
-                    map: gmap,
-                    draggable: true
-                });
-
-                window.google.maps.event.addListener( gmap, 'click', function ( event ) {
-                    marker.setPosition( event.latLng );
-                    updatePositionInput( event.latLng );
-                } );
-
-                window.google.maps.event.addListener( marker, 'drag', function ( event ) {
-                    updatePositionInput(event.latLng );
-                } );
-
-            } catch( e ) {
-                console.log( 'Google API not found.' );
-            }
-
-            autoCompleteAddress();
-
-            function updatePositionInput( latLng ) {
-                $input_area.val( latLng.lat() + ',' + latLng.lng() );
-            }
-
-            function updatePositionMarker() {
-                var coord = $input_area.val(),
-                    pos, zoom;
-
-                if ( coord ) {
-                    pos = coord.split( ',' );
-                    marker.setPosition( new window.google.maps.LatLng( pos[0], pos[1] ) );
-
-                    zoom = pos.length > 2 ? parseInt( pos[2], 10 ) : 12;
-
-                    gmap.setCenter( marker.position );
-                    gmap.setZoom( zoom );
-                }
-            }
-
-            function geocodeAddress( address ) {
-                geocoder.geocode( {'address': address}, function ( results, status ) {
-                    if ( status == window.google.maps.GeocoderStatus.OK ) {
-                        updatePositionInput( results[0].geometry.location );
-                        marker.setPosition( results[0].geometry.location );
-                        gmap.setCenter( marker.position );
-                        gmap.setZoom( 15 );
-                    }
-                } );
-            }
-
-            function autoCompleteAddress(){
-                if (!$input_add) return null;
-
-                $input_add.autocomplete({
-                    source: function(request, response) {
-                        // TODO: add 'region' option, to help bias geocoder.
-                        geocoder.geocode( {'address': request.term }, function(results, status) {
-                            response(jQuery.map(results, function(item) {
-                                return {
-                                    label     : item.formatted_address,
-                                    value     : item.formatted_address,
-                                    latitude  : item.geometry.location.lat(),
-                                    longitude : item.geometry.location.lng()
-                                };
-                            }));
-                        });
-                    },
-                    select: function(event, ui) {
-
-                        $input_area.val(ui.item.latitude + ',' + ui.item.longitude );
-
-                        var location = new window.google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-
-                        gmap.setCenter(location);
-                        // Drop the Marker
-                        setTimeout( function(){
-                            marker.setValues({
-                                position    : location,
-                                animation   : window.google.maps.Animation.DROP
-                            });
-                        }, 1500);
-                    }
-                });
-            }
 
         });
     })(jQuery);

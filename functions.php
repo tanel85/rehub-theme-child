@@ -1,14 +1,19 @@
 <?php
 add_action( 'wp_enqueue_scripts', 'enqueue_parent_styles' );
 
-define( 'REHUB_CHILD_DIR', dirname( __FILE__ ) );
-require_once REHUB_CHILD_DIR . '/seller-services/functions.php';
-
 function enqueue_parent_styles() {
-   wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
+	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
 }
 
-    //save the field value
+if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
+	require_once DOKAN_PRO_DIR . '/classes/settings.php';
+}
+
+define( 'REHUB_CHILD_DIR', dirname( __FILE__ ) );
+require_once REHUB_CHILD_DIR . '/seller-services/functions.php';
+require_once REHUB_CHILD_DIR . '/registration-functions.php';
+
+//save the field value
 add_action( 'dokan_store_profile_saved', 'save_extra_fields', 15 );
 function save_extra_fields( $store_id ) {
     $dokan_settings = dokan_get_store_info($store_id);
@@ -87,7 +92,7 @@ add_filter( 'woocommerce_states', 'custom_woocommerce_states' );
 function custom_woocommerce_states( $states ) {
 
   $states['EE'] = array(
-    'EE1' => 'Harjumaa', 
+    'EE1' => 'Harjumaa',
     'EE2' => 'Tartumaa'
   );
 
@@ -185,9 +190,7 @@ function render_biography_form() {
 
 
 function dokan_remove_unneeded_vendor_menu( $menus ) {
-//	error_log(print_r($menus, true));
 	unset($menus['coupons']);
-
 	return $menus;
 }
 
@@ -221,8 +224,15 @@ function set_vendor_settings_help_texts() {
 	}
 }
 
+// Override chat endpoint. WIthout this vendor dashboard inbox link gives 404
+add_filter( 'dokan_query_var_filter', 'dokan_add_endpoint' );
 
+function dokan_add_endpoint( $query_var ) {
+	$query_var['inbox'] = 'inbox';
 
+	return $query_var;
+}
+// End override chat endpoint
 
 
 ?>

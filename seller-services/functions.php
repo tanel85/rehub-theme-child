@@ -13,7 +13,7 @@ function load_services_menu( $sub_settings ) {
 		'title'      => __( 'Services', 'dokan-lite' ),
 		'icon'       => '<i class="fa fa-user"></i>',
 		'url'        => dokan_get_navigation_url( 'settings/services' ),
-		'pos'        => 11,
+		'pos'        => 31,
 		'permission' => 'dokan_view_store_settings_menu'
 	);
 	return $sub_settings;

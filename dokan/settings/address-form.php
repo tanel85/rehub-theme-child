@@ -125,7 +125,8 @@ $address_state   = isset( $profile_info['address']['state'] ) ? $profile_info['a
 					</select>
 				<?php } ?>
 			</div>
-		<?php }
+		<?php
+		}
 
 		if ( $seller_address_fields['country'] ) {
 			?>
