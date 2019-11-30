@@ -1,4 +1,4 @@
-<div class="dokan-w4">
+<div class="dokan-w2">
     <select
         class="dokan-select2 dokan-form-control"
         name="dokan_seller_state"

@@ -1,7 +1,7 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'enqueue_parent_styles' );
+add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 
-function enqueue_parent_styles() {
+function enqueue_scripts() {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
 }
 
@@ -12,6 +12,7 @@ if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 define( 'REHUB_CHILD_DIR', dirname( __FILE__ ) );
 require_once REHUB_CHILD_DIR . '/seller-services/functions.php';
 require_once REHUB_CHILD_DIR . '/registration-functions.php';
+require_once REHUB_CHILD_DIR . '/store-list/store-list-functions.php';
 
 //save the field value
 add_action( 'dokan_store_profile_saved', 'save_extra_fields', 15 );
@@ -19,6 +20,12 @@ function save_extra_fields( $store_id ) {
     $dokan_settings = dokan_get_store_info($store_id);
     if ( isset( $_POST['min_order'] ) ) {
         $dokan_settings['min_order'] = $_POST['min_order'];
+    }
+    if ( isset( $_POST['min_reservation_time_open'] ) ) {
+        $dokan_settings['min_reservation_time_open'] = $_POST['min_reservation_time_open'];
+    }
+    if ( isset( $_POST['min_reservation_time_closed'] ) ) {
+        $dokan_settings['min_reservation_time_closed'] = $_POST['min_reservation_time_closed'];
     }
     if ( isset( $_POST['main_user_name'] ) ) {
         $dokan_settings['main_user_name'] = $_POST['main_user_name'];
@@ -39,49 +46,6 @@ function save_extra_fields( $store_id ) {
     $dokan_settings['live_chat'] = 'yes';
     $dokan_settings['dokan_store_time_enabled'] = 'yes';
     update_user_meta( $store_id, 'dokan_profile_settings', $dokan_settings );
-}
-
-
-add_action( 'dokan_seller_search_form', 'add_state_dropdown_in_seller_search_form' );
-
-/**
- * Add store category dropdown in seller search form
- *
- * @since 2.9.2
- *
- * @return void
- */
-function add_state_dropdown_in_seller_search_form() {
-	$state_query = ! empty( $_GET['dokan_seller_state'] ) ? sanitize_text_field( $_GET['dokan_seller_state'] ) : null;
-
-        $country_obj   = new WC_Countries();
-        $states        = $country_obj->states['EE'];
-
-	$args = array(
-		'state_query' => $state_query,
-                'states' => $states
-	);
-
-        dokan_get_template_part( 'seller-search-form-categories', '', $args );
-}
-
-add_action( 'dokan_store_list_args', 'apply_seller_custom_filters', 30, 2 );
-
-function is_seller_state($seller) {
-  $dokan_seller_state = sanitize_text_field( $_REQUEST['dokan_seller_state'] );
-  $dokan_settings = get_user_meta( $seller->ID, 'dokan_profile_settings', true );
-  return $dokan_settings['address']['state'] == $dokan_seller_state;
-}
-
-function apply_seller_custom_filters( $args ) {
-  if ( !empty( $_REQUEST['dokan_seller_state'] ) ) {
-		$sellers_filtered = array_filter($args['sellers']['users'], "is_seller_state");
-		$args['sellers'] = array(
-			'users' => $sellers_filtered,
-			'count' => count($sellers_filtered)
-		);
-  }
-  return $args;
 }
 
 /**
