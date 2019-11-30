@@ -1,6 +1,7 @@
 <?php
 
 add_action( 'wp_enqueue_scripts', 'enqueue_store_list_scripts' );
+add_action( 'dokan_seller_search_form', 'add_delivery_option_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_state_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_delivery_date_dropdown' );
 add_action( 'dokan_store_list_args', 'apply_seller_custom_filters', 30, 2 );
@@ -10,6 +11,10 @@ function enqueue_store_list_scripts() {
 	wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.js', array(), false, true );
 	wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.css',array());
 	wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
+}
+
+function add_delivery_option_dropdown() {
+	dokan_get_template_part( 'store-list-delivery-option' );
 }
 
 function add_state_dropdown() {
@@ -32,10 +37,15 @@ function add_delivery_date_dropdown() {
 
 function is_seller_visible($seller) {
 	$store_info = dokan_get_store_info( $seller->ID );
+	$filter_delivery_option = empty( $_REQUEST['delivery_option'] ) || is_seller_delivery_option($store_info);
 	$filter_state = empty( $_REQUEST['dokan_seller_state'] ) || is_seller_state($store_info);
 	$filter_delivery_date = empty( $_REQUEST['delivery_date'] ) || is_seller_delivery_date($store_info);
-	$result = $filter_state && $filter_delivery_date;
-	return $result == true;
+	return $filter_delivery_option && $filter_state && $filter_delivery_date;
+}
+
+function is_seller_delivery_option($store_info) {
+	$delivery_option = sanitize_text_field( $_REQUEST['delivery_option'] );
+	return $delivery_option != '1' || $store_info['delivery'] == 'yes';
 }
 
 function is_seller_state($store_info) {
@@ -60,7 +70,7 @@ function is_seller_delivery_date($store_info) {
 }
 
 function apply_seller_custom_filters( $args ) {
-	if ( !empty( $_REQUEST['dokan_seller_state'] ) || !empty( $_REQUEST['delivery_date'] ) ) {
+	if ( !empty( $_REQUEST['dokan_seller_state'] ) || !empty( $_REQUEST['delivery_date'] ) || !empty( $_REQUEST['delivery_option'] ) ) {
 		$sellers_filtered = array_filter($args['sellers']['users'], "is_seller_visible");
 		$args['sellers'] = array(
 			'users' => $sellers_filtered,
