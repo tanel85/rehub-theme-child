@@ -57,8 +57,13 @@ function is_seller_delivery_date($store_info) {
 	if (empty($store_info['dokan_store_time'])) {
 		return false;
 	}
-	$days = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
 	$delivery_date = strtotime(sanitize_text_field( $_REQUEST['delivery_date'] ));
+	return is_seller_open($store_info, $delivery_date) && !is_delivery_date_on_vacation($store_info, $delivery_date)
+		&& is_at_least_minimum_reservation_time($store_info, $delivery_date);
+}
+
+function is_seller_open($store_info, $delivery_date) {
+	$days = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
 	$weekday = date('w', $delivery_date);
 	$day = $days[$weekday];
 	$store_open_day = $store_info['dokan_store_time'][$day];
@@ -67,6 +72,31 @@ function is_seller_delivery_date($store_info) {
 	}
 	return $delivery_date >= strtotime($store_open_day['opening_time'], $delivery_date) &&
 	       $delivery_date <= strtotime($store_open_day['closing_time'], $delivery_date);
+}
+
+function is_delivery_date_on_vacation($store_info, $delivery_date) {
+	if (empty($store_info['seller_vacation_schedules'])) {
+		return false;
+	}
+	$delivery_date_wo_time = strtotime(date('Y-m-d', $delivery_date));
+	foreach ( $store_info['seller_vacation_schedules'] as $vacation ) {
+		if ($delivery_date_wo_time >= strtotime($vacation['from']) && $delivery_date_wo_time <= strtotime($vacation['to'])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function is_at_least_minimum_reservation_time($store_info, $delivery_date) {
+	$current_time   = strtotime( date( 'Y-m-d H:i:s' ) );
+	$seller_open = is_seller_open($store_info, $current_time);
+	if ( $seller_open && !empty($store_info['min_reservation_time_open'])) {
+		return $current_time <= $delivery_date - ( $store_info['min_reservation_time_open'] * 60 * 60);
+	}
+	if (!$seller_open && !empty($store_info['min_reservation_time_closed'])) {
+		return $current_time <= $delivery_date - ( $store_info['min_reservation_time_closed'] * 60 * 60);
+	}
+	return true;
 }
 
 function apply_seller_custom_filters( $args ) {
