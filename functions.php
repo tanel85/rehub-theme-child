@@ -9,10 +9,10 @@ if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 	require_once DOKAN_PRO_DIR . '/classes/settings.php';
 }
 
-define( 'REHUB_CHILD_DIR', dirname( __FILE__ ) );
-require_once REHUB_CHILD_DIR . '/seller-services/functions.php';
-require_once REHUB_CHILD_DIR . '/registration-functions.php';
-require_once REHUB_CHILD_DIR . '/store-list/store-list-functions.php';
+define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
+require_once ELESSI_CHILD_DIR . '/seller-services/functions.php';
+require_once ELESSI_CHILD_DIR . '/registration-functions.php';
+require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 
 //save the field value
 add_action( 'dokan_store_profile_saved', 'save_extra_fields', 15 );
