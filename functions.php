@@ -198,5 +198,11 @@ function dokan_add_endpoint( $query_var ) {
 }
 // End override chat endpoint
 
+// register nonce check is done in theme function. Switch it out in Dokan.
+add_filter('dokan_register_nonce_check', 'register_nonce_check');
+
+function register_nonce_check() {
+    return false;
+}
 
 ?>
