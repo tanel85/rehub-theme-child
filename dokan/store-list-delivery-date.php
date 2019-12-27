@@ -1,5 +1,5 @@
 <div class="dokan-w2" style="padding: 0 15px;">
-    <input class="delivery_date" name="delivery_date" id="delivery_date" type="text" style="position: relative; z-index:1000;"
+    <input class="delivery_date" name="delivery_date" id="delivery_date" type="text" style="position: relative; z-index:399;"
            placeholder="<?php esc_attr_e( 'Delivery date', 'dokan-lite' ); ?>">
 </div>
 
