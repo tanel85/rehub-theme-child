@@ -1,5 +1,8 @@
 <?php
 
+/*Remove empty sku (item code) from product details page*/
+add_filter( 'wc_product_sku_enabled', '__return_false' );
+
 /*Remove quickview icon from product list*/
 if (!function_exists('elessi_quickview_in_list')) :
     function elessi_quickview_in_list(){
