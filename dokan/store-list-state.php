@@ -5,7 +5,7 @@
     >
         <option value=""><?php echo esc_html( __( 'Maakond', 'dokan' ) ); ?></option>
         <?php foreach ( $states as $key => $value ): ?>
-            <option value="<?php echo esc_attr( $key ); ?>" <?php echo ( $key === $state_query ) ? 'selected' : ''; ?>>
+            <option value="<?php echo esc_attr( $key ); ?>" <?php echo ( $key === $session_value ) ? 'selected' : ''; ?>>
                 <?php echo esc_html( $value ); ?>
             </option>
         <?php endforeach; ?>

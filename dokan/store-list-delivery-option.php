@@ -4,10 +4,10 @@
         name="delivery_option"
     >
         <option value=""><?php echo esc_html( __( 'Order type', 'dokan-lite' ) ); ?></option>
-        <option value="1">
+        <option value="1" <?php echo ( '1' === $session_value ) ? 'selected' : ''; ?>>
             <?php echo esc_html( __( 'Delivery', 'dokan-lite' ) ); ?>
         </option>
-        <option value="2">
+        <option value="2" <?php echo ( '2' === $session_value ) ? 'selected' : ''; ?>>
             <?php echo esc_html( __( 'Takeout', 'dokan-lite' ) ); ?>
         </option>
     </select>

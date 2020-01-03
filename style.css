@@ -8,3 +8,17 @@ Template: elessi-theme
 Version: 1.0.0
 Text Domain: elessi-theme-child
 */ Custom CSS goes after this line
+
+.dummy-css {}
+
+#billing_delivery_date_field {
+    width: 49%;
+    padding-right: 2%;
+    float: right;
+}
+
+#billing_delivery_field {
+    width: 49%;
+    padding-right: 2%;
+    float: left;
+}

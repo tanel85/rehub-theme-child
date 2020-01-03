@@ -27,6 +27,11 @@
             return minDate;
         }
 
+        var dateFromSession = "<?php echo $session_value; ?>";
+        if (dateFromSession !== undefined) {
+            deliveryDate.val(dateFromSession);
+        }
+
         form.on( 'dokan_seller_search_populate_data', function ( e, data ) {
             data.delivery_date = deliveryDate.val();
         } );

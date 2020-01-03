@@ -3,6 +3,11 @@ add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 
 function enqueue_scripts() {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri().'/style.css' );
+
+    wp_enqueue_script('jquery-ui-datepicker');
+    wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.js', array(), false, true );
+    wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.css',array());
+    wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
 }
 
 if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
@@ -13,6 +18,7 @@ define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
 require_once ELESSI_CHILD_DIR . '/seller-services/functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
+require_once ELESSI_CHILD_DIR . '/checkout-functions.php';
 require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 
 //save the field value

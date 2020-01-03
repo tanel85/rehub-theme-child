@@ -1,30 +1,26 @@
 <?php
 
-add_action( 'wp_enqueue_scripts', 'enqueue_store_list_scripts' );
 add_action( 'dokan_seller_search_form', 'add_delivery_option_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_state_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_delivery_date_dropdown' );
 add_action( 'dokan_store_list_args', 'apply_seller_custom_filters', 30, 2 );
 
-function enqueue_store_list_scripts() {
-	wp_enqueue_script('jquery-ui-datepicker');
-	wp_enqueue_script('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.js', array(), false, true );
-	wp_enqueue_style('jquery-ui-timepicker-addon',get_stylesheet_directory_uri().'/assets/jquery-ui-timepicker-addon.css',array());
-	wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
-}
-
 function add_delivery_option_dropdown() {
-	dokan_get_template_part( 'store-list-delivery-option' );
+    $session_value = !empty( $_SESSION['store_filter_delivery_option'] ) ? $_SESSION['store_filter_delivery_option'] : null;
+    $args = array(
+        'session_value' => $session_value
+    );
+	dokan_get_template_part( 'store-list-delivery-option', '', $args );
 }
 
 function add_state_dropdown() {
-	$state_query = ! empty( $_GET['dokan_seller_state'] ) ? sanitize_text_field( $_GET['dokan_seller_state'] ) : null;
+    $session_value = !empty( $_SESSION['store_filter_dokan_seller_state'] ) ? $_SESSION['store_filter_dokan_seller_state'] : null;
 
 	$country_obj   = new WC_Countries();
 	$states        = $country_obj->states['EE'];
 
 	$args = array(
-		'state_query' => $state_query,
+		'session_value' => $session_value,
 		'states' => $states
 	);
 
@@ -32,32 +28,38 @@ function add_state_dropdown() {
 }
 
 function add_delivery_date_dropdown() {
-	dokan_get_template_part( 'store-list-delivery-date' );
+    $session_value = !empty( $_SESSION['store_filter_delivery_date'] ) ? $_SESSION['store_filter_delivery_date'] : null;
+    $args = array(
+        'session_value' => $session_value
+    );
+	dokan_get_template_part( 'store-list-delivery-date', '', $args );
 }
 
 function is_seller_visible($seller) {
 	$store_info = dokan_get_store_info( $seller->ID );
-	$filter_delivery_option = empty( $_REQUEST['delivery_option'] ) || is_seller_delivery_option($store_info);
-	$filter_state = empty( $_REQUEST['dokan_seller_state'] ) || is_seller_state($store_info);
-	$filter_delivery_date = empty( $_REQUEST['delivery_date'] ) || is_seller_delivery_date($store_info);
+	$filter_delivery_option = empty( get_filter_value('delivery_option') ) || is_seller_delivery_option($store_info);
+	$filter_state = empty( get_filter_value('dokan_seller_state') ) || is_seller_state($store_info);
+	$filter_delivery_date = empty( get_filter_value('delivery_date') ) || is_seller_delivery_date($store_info);
 	return $filter_delivery_option && $filter_state && $filter_delivery_date;
 }
 
 function is_seller_delivery_option($store_info) {
-	$delivery_option = sanitize_text_field( $_REQUEST['delivery_option'] );
-	return $delivery_option != '1' || $store_info['delivery'] == 'yes';
+	$delivery_option = get_filter_value( 'delivery_option');
+    $delivery = array_key_exists('delivery', $store_info) ? $store_info['delivery'] : null;
+    return $delivery_option != '1' || $delivery == 'yes';
 }
 
 function is_seller_state($store_info) {
-	$dokan_seller_state = sanitize_text_field( $_REQUEST['dokan_seller_state'] );
-	return $store_info['address']['state'] == $dokan_seller_state;
+	$dokan_seller_state = get_filter_value('dokan_seller_state');
+    $address_state = array_key_exists('state', $store_info['address']) ? $store_info['address']['state'] : null;
+    return $address_state == $dokan_seller_state;
 }
 
 function is_seller_delivery_date($store_info) {
 	if (empty($store_info['dokan_store_time'])) {
 		return false;
 	}
-	$delivery_date = strtotime(sanitize_text_field( $_REQUEST['delivery_date'] ));
+	$delivery_date = strtotime(get_filter_value('delivery_date'));
 	return is_seller_open($store_info, $delivery_date) && !is_delivery_date_on_vacation($store_info, $delivery_date)
 		&& is_at_least_minimum_reservation_time($store_info, $delivery_date);
 }
@@ -100,7 +102,8 @@ function is_at_least_minimum_reservation_time($store_info, $delivery_date) {
 }
 
 function apply_seller_custom_filters( $args ) {
-	if ( !empty( $_REQUEST['dokan_seller_state'] ) || !empty( $_REQUEST['delivery_date'] ) || !empty( $_REQUEST['delivery_option'] ) ) {
+    add_filter_values_to_state();
+	if ( !empty( get_filter_value('dokan_seller_state') ) || !empty( get_filter_value('delivery_date') ) || !empty( get_filter_value('delivery_option') ) ) {
 		$sellers_filtered = array_filter($args['sellers']['users'], "is_seller_visible");
 		$args['sellers'] = array(
 			'users' => $sellers_filtered,
@@ -108,6 +111,25 @@ function apply_seller_custom_filters( $args ) {
 		);
 	}
 	return $args;
+}
+
+function get_filter_value($name) {
+    return !empty($_REQUEST[$name]) ? sanitize_text_field($_REQUEST[$name]) : (!empty($_SESSION['store_filter_'.$name]) ? $_SESSION['store_filter_'.$name] : null);
+}
+
+function add_filter_values_to_state() {
+    if (session_id() == '' ) {
+        session_start();
+    }
+    add_filter_value_to_state('dokan_seller_state');
+    add_filter_value_to_state('delivery_date');
+    add_filter_value_to_state('delivery_option');
+}
+
+function add_filter_value_to_state($name) {
+    if (array_key_exists($name, $_REQUEST)) {
+        $_SESSION['store_filter_'.$name] = !empty( $_REQUEST[$name] ) ? $_REQUEST[$name] : null;
+    }
 }
 
 ?>
