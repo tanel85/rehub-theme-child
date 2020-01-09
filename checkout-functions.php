@@ -9,6 +9,7 @@ add_filter( 'woocommerce_cart_needs_shipping', function() {return false;});
 
 
 function default_values_checkout_fields( $fields ) {
+    //TODO: siin saab aadressi kohustuslikkust dünaamiliselt muuta
     $fields['billing']['billing_delivery']['default'] = get_session_value('store_filter_delivery_option', '1');
     $fields['billing']['billing_state']['required'] = 1;
     $fields['billing']['billing_delivery_date']['autocomplete'] = '';
