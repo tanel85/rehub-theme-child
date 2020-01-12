@@ -11,6 +11,76 @@ Text Domain: elessi-theme-child
 
 .dummy-css {}
 
+.profile-info {
+    display: flex;
+}
+
+.review-item {
+    border-bottom: #eeeeee solid 1px;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+@media (max-width: 1199px) {
+    .profile-info {
+        display: unset;
+        width: 100% !important;
+    }
+    .profile-info-inner-first {
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 52.96552em) {
+    .store-reviews {
+        padding-left: 40px;
+    }
+    .review-item {
+        flex-direction: row-reverse;
+    }
+    .review-item-rating {
+        padding-left: 40px;
+    }
+    .product-summary {
+        padding-top: 8px;
+    }
+}
+
+.rating-link:hover {
+    color: #008400 !important;
+}
+
+.add_to_cart_text {
+    color: #ffffff !important;
+    background-color: #008400 !important;
+    border-color: #FFFFFF !important;
+}
+
+.add_to_cart_text:hover {
+    opacity: 0.8;
+}
+
+.dokan-store-info li:before {
+    content: "" !important;
+}
+.profile-info-summery li {
+    display: block;
+}
+
+.profile-info-inner-first {
+    flex: 1;
+    padding-right: 30px;
+}
+
+.profile-info-inner-second {
+    padding-top: 12px;
+}
+
+.store_header_details {
+    float: none !important;
+}
+
 #billing_delivery_date_field {
     width: 49%;
     padding-right: 2%;
@@ -21,4 +91,8 @@ Text Domain: elessi-theme-child
     width: 49%;
     padding-right: 2%;
     float: left;
+}
+
+#nav-below {
+    display: block !important;
 }

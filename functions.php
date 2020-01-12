@@ -18,6 +18,7 @@ define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
 require_once ELESSI_CHILD_DIR . '/seller-services/functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
+require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
 require_once ELESSI_CHILD_DIR . '/checkout-functions.php';
 require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 

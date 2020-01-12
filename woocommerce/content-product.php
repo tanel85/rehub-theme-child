@@ -47,7 +47,10 @@ do_action('woocommerce_before_shop_loop_item');
         <div class="product-outner">
             <div class="product-inner">
                 <div class="product-img-wrap" style="cursor: pointer">
-                    <div class="product-img-wrap-inner quick-view" data-prod="<?php echo esc_attr($productId); ?>">
+                    <div class="product-img-wrap-inner">
+                        <div class="quick-view" data-prod="<?php echo esc_attr($productId); ?>">
+                            <?php do_action('woocommerce_before_shop_loop_item_title_quickview'); ?>
+                        </div>
                         <?php do_action('woocommerce_before_shop_loop_item_title'); ?>
                     </div>
                 </div>
@@ -61,13 +64,8 @@ do_action('woocommerce_before_shop_loop_item');
 
                 <!-- Clone Group btns for layout List -->
                 <div class="hidden-tag nasa-list-stock-wrap">
-                    <p class="nasa-list-stock-status <?php echo esc_attr($stock_status); ?>">
-                        <?php echo esc_html__('AVAILABILITY: ', 'elessi-theme') . '<span>' . $stock_label . '</span>'; ?>
-                    </p>
                 </div>
                 <div class="group-btn-in-list-wrap hidden-tag"><div class="group-btn-in-list"></div></div>
-
-                <?php echo elessi_time_sale($time_sale); ?>
             </div>
         </div>
     </div>

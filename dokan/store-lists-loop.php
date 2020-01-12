@@ -60,12 +60,6 @@
                                                 <p class="store-address"><?php echo wp_kses( $store_address, $allowed_tags ); ?></p>
                                             <?php endif ?>
 
-                                            <?php if ( $store_phone ) { ?>
-                                                <p class="store-phone">
-                                                    <i class="fa fa-phone" aria-hidden="true"></i> <?php echo esc_html( $store_phone ); ?>
-                                                </p>
-                                            <?php } ?>
-
                                             <?php do_action( 'dokan_seller_listing_after_store_data', $seller, $store_info ); ?>
 
                                         </div>
