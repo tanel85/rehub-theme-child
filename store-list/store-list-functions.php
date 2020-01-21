@@ -4,6 +4,7 @@ add_action( 'dokan_seller_search_form', 'add_delivery_option_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_state_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_delivery_date_dropdown' );
 add_action( 'dokan_store_list_args', 'apply_seller_custom_filters', 30, 2 );
+add_filter( 'dokan_store_lists_filter', '__return_false' );
 
 function add_delivery_option_dropdown() {
     $session_value = !empty( $_SESSION['store_filter_delivery_option'] ) ? $_SESSION['store_filter_delivery_option'] : null;

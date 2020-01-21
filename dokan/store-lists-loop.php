@@ -1,18 +1,10 @@
-<div id="dokan-seller-listing-wrap">
+<div id="dokan-seller-listing-wrap" class="grid-view">
     <div class="seller-listing-content">
         <?php if ( $sellers['users'] ) : ?>
             <ul class="dokan-seller-wrap">
                 <?php
                 foreach ( $sellers['users'] as $seller ) {
                     $vendor            = dokan()->vendor->get( $seller->ID );
-
-                    #$existing_dokan_settings = get_user_meta( $seller->ID, 'dokan_profile_settings', true );
-                    #var_dump($existing_dokan_settings['address']['state']);
-                    #$search_term     = isset( $_REQUEST['search_term'] ) ? sanitize_text_field( $_REQUEST['search_term'] ) : '';
-                    #$dokan_seller_state     = isset( $_REQUEST['dokan_seller_state'] ) ? sanitize_text_field( $_REQUEST['dokan_seller_state'] ) : '';
-                    #var_dump($dokan_seller_state);
-
-
                     $store_banner_id   = $vendor->get_banner_id();
                     $store_name        = $vendor->get_shop_name();
                     $store_url         = $vendor->get_shop_url();
@@ -26,52 +18,66 @@
 
                     <li class="dokan-single-seller woocommerce coloum-<?php echo esc_attr( $per_row ); ?> <?php echo ( ! $store_banner_id ) ? 'no-banner-img' : ''; ?>">
                         <div class="store-wrapper">
-                            <div class="store-content">
-                                <div class="store-info" style="background-image: url( '<?php echo is_array( $store_banner_url ) ? esc_attr( $store_banner_url[0] ) : esc_attr( $store_banner_url ); ?>');">
-                                    <div class="store-data-container">
-                                        <div class="featured-favourite">
-                                            <?php if ( $is_store_featured ) : ?>
-                                                <div class="featured-label"><?php esc_html_e( 'Featured', 'dokan-lite' ); ?></div>
-                                            <?php endif ?>
+                            <div class="store-header">
+                                <div class="store-banner">
+                                    <a href="<?php echo esc_url( $store_url ); ?>">
+                                        <img src="<?php echo is_array( $store_banner_url ) ? esc_attr( $store_banner_url[0] ) : esc_attr( $store_banner_url ); ?>">
+                                    </a>
+                                </div>
+                            </div>
 
-                                            <?php do_action( 'dokan_seller_listing_after_featured', $seller, $store_info ); ?>
-                                        </div>
+                            <div class="store-content <?php echo ! $store_banner_id ? esc_attr( 'default-store-banner' ) : '' ?>">
+                                <div class="store-data-container">
+                                    <div class="featured-favourite">
+                                        <?php if ( $is_store_featured ) : ?>
+                                            <div class="featured-label"><?php esc_html_e( 'Featured', 'dokan-lite' ); ?></div>
+                                        <?php endif ?>
 
-                                        <div class="store-data">
-                                            <h2><a href="<?php echo esc_attr( $store_url ); ?>"><?php echo esc_html( $store_name ); ?></a></h2>
+                                        <?php do_action( 'dokan_seller_listing_after_featured', $seller, $store_info ); ?>
+                                    </div>
 
-                                            <?php if ( !empty( $store_rating['count'] ) ): ?>
-                                                <div class="star-rating dokan-seller-rating" title="<?php echo sprintf( esc_attr__( 'Rated %s out of 5', 'dokan-lite' ), esc_attr( $store_rating['rating'] ) ) ?>">
-                                                    <span style="width: <?php echo ( esc_attr( ( $store_rating['rating'] / 5 ) ) * 100 - 1 ); ?>%">
-                                                        <strong class="rating"><?php echo esc_html( $store_rating['rating'] ); ?></strong> <?php _e( 'out of 5', 'dokan-lite' ); ?>
-                                                    </span>
-                                                </div>
-                                            <?php endif ?>
+                                    <div class="store-data">
+                                        <h2><a href="<?php echo esc_attr( $store_url ); ?>"><?php echo esc_html( $store_name ); ?></a></h2>
 
-                                            <?php if ( $store_address ): ?>
-                                                <?php
-                                                    $allowed_tags = array(
-                                                        'span' => array(
-                                                            'class' => array(),
-                                                        ),
-                                                        'br' => array()
-                                                    );
-                                                ?>
-                                                <p class="store-address"><?php echo wp_kses( $store_address, $allowed_tags ); ?></p>
-                                            <?php endif ?>
+                                        <?php if ( !empty( $store_rating['count'] ) ): ?>
+                                            <div class="star-rating dokan-seller-rating" title="<?php echo sprintf( esc_attr__( 'Rated %s out of 5', 'dokan-lite' ), esc_attr( $store_rating['rating'] ) ) ?>">
+                                                <span style="width: <?php echo ( esc_attr( ( $store_rating['rating'] / 5 ) ) * 100 - 1 ); ?>%"></span>
+                                                <p class="rating">
+                                                    <?php echo esc_html( sprintf( __( '%s out of 5', 'dokan-lite' ), $store_rating['rating'] ) ); ?>
+                                                </p>
+                                            </div>
+                                        <?php endif ?>
 
-                                            <?php do_action( 'dokan_seller_listing_after_store_data', $seller, $store_info ); ?>
+                                        <?php if ( $store_address ): ?>
+                                            <?php
+                                            $allowed_tags = array(
+                                                'span' => array(
+                                                    'class' => array(),
+                                                ),
+                                                'br' => array()
+                                            );
+                                            ?>
+                                            <p class="store-address"><?php echo wp_kses( $store_address, $allowed_tags ); ?></p>
+                                        <?php endif ?>
 
-                                        </div>
+                                        <?php if ( $store_phone ) { ?>
+                                            <p class="store-phone">
+                                                <i class="fa fa-phone" aria-hidden="true"></i> <?php echo esc_html( $store_phone ); ?>
+                                            </p>
+                                        <?php } ?>
+
+                                        <?php do_action( 'dokan_seller_listing_after_store_data', $seller, $store_info ); ?>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="store-footer">
                                 <div class="seller-avatar">
                                     <?php echo get_avatar( $seller->ID, 150 ); ?>
                                 </div>
-                                <a href="<?php echo esc_url( $store_url ); ?>" class="dokan-btn dokan-btn-theme"><?php esc_html_e( 'Visit Store', 'dokan-lite' ); ?></a>
-
+                                <a href="<?php echo esc_url( $store_url ); ?>" title="<?php esc_attr_e( 'Visit Store', 'dokan-lite' );?>">
+                                    <span class="dashicons dashicons-arrow-right-alt2 dokan-btn-theme dokan-btn-round"></span>
+                                </a>
                                 <?php do_action( 'dokan_seller_listing_footer_content', $seller, $store_info ); ?>
                             </div>
                         </div>
