@@ -48,14 +48,19 @@ class Store_Rating {
         <?php
     }
 
-    function get_readable_rating($seller_id) {
+    function get_readable_rating($seller_id, $number_only = false) {
         $vendor = dokan()->vendor->get( $seller_id );
         $rating = $vendor->get_rating();
         if ( ! $rating['count'] ) {
             $html = __( 'No reviews found yet!', 'dokan-lite' );
         } else {
-            $long_text   = _n( '%s rating from %d review', '%s rating from %d reviews', $rating['count'], 'dokan-lite' );
-            $review_text = sprintf( $long_text, $rating['rating'], $rating['count'] );
+            $review_text = '';
+            if ($number_only == true) {
+                $review_text = $rating['rating'];
+            } else {
+                $long_text   = _n( '%s rating from %d review', '%s rating from %d reviews', $rating['count'], 'dokan-lite' );
+                $review_text = sprintf( $long_text, $rating['rating'], $rating['count'] );
+            }
             $width = (intval($rating['rating']) / 5) * 100;
             $html = '<a id="rating-link" class="rating-link"><div class="dokan-rating" style="display: flex;">
                         <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" style="margin-top: 4px;">

@@ -45,6 +45,9 @@ Text Domain: elessi-theme-child
     .product-summary {
         padding-top: 8px;
     }
+    .info.store_list_loop {
+        padding: 20px 0 0 0 !important;
+    }
 }
 
 .rating-link:hover {
@@ -95,4 +98,8 @@ Text Domain: elessi-theme-child
 
 #nav-below {
     display: block !important;
+}
+
+.add_to_cart_text.store_list_loop:before {
+    display: none !important;
 }
