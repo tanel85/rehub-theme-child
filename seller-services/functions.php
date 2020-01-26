@@ -63,14 +63,14 @@ function update_services() {
 		'appetizer'   => $post_data['appetizer'],
 		'dessert'   => $post_data['dessert']
 	);
-	$events = array(
-		'team_breakfast'   => $post_data['team_breakfast'],
-		'team_lunch'   => $post_data['team_lunch'],
-		'meeting'   => $post_data['meeting'],
-		'birthday'   => $post_data['birthday'],
-		'company_event'   => $post_data['company_event'],
-		'wedding'   => $post_data['wedding'],
-		'conference'   => $post_data['conference']
+    $events = array(
+		'seminar'   => $post_data['seminar'],
+		'laste_synnipaev'   => $post_data['laste_synnipaev'],
+		'kohvipaus'   => $post_data['kohvipaus'],
+		'grill'   => $post_data['grill'],
+		'konverents'   => $post_data['konverents'],
+		'synnipaev'   => $post_data['synnipaev'],
+		'louna_kontoris'   => $post_data['louna_kontoris']
 	);
 	$diets = array(
 		'vegan'   => $post_data['vegan'],

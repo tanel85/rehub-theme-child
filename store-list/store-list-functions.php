@@ -3,6 +3,7 @@
 add_action( 'dokan_seller_search_form', 'add_delivery_option_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_state_dropdown' );
 add_action( 'dokan_seller_search_form', 'add_delivery_date_dropdown' );
+add_action( 'dokan_seller_search_form_row2', 'add_event_type_select' );
 add_action( 'dokan_store_list_args', 'apply_seller_custom_filters', 30, 2 );
 add_filter( 'dokan_store_lists_filter', '__return_false' );
 
@@ -11,7 +12,7 @@ function add_delivery_option_dropdown() {
     $args = array(
         'session_value' => $session_value
     );
-	dokan_get_template_part( 'store-list-delivery-option', '', $args );
+	dokan_get_template_part( 'store-list-search/store-list-delivery-option', '', $args );
 }
 
 function add_state_dropdown() {
@@ -25,7 +26,7 @@ function add_state_dropdown() {
 		'states' => $states
 	);
 
-	dokan_get_template_part( 'store-list-state', '', $args );
+	dokan_get_template_part( 'store-list-search/store-list-state', '', $args );
 }
 
 function add_delivery_date_dropdown() {
@@ -33,15 +34,16 @@ function add_delivery_date_dropdown() {
     $args = array(
         'session_value' => $session_value
     );
-	dokan_get_template_part( 'store-list-delivery-date', '', $args );
+	dokan_get_template_part( 'store-list-search/store-list-delivery-date', '', $args );
 }
 
 function is_seller_visible($seller) {
 	$store_info = dokan_get_store_info( $seller->ID );
 	$filter_delivery_option = empty( get_filter_value('delivery_option') ) || is_seller_delivery_option($store_info);
 	$filter_state = empty( get_filter_value('dokan_seller_state') ) || is_seller_state($store_info);
-	$filter_delivery_date = empty( get_filter_value('delivery_date') ) || is_seller_delivery_date($store_info);
-	return $filter_delivery_option && $filter_state && $filter_delivery_date;
+    $filter_event_type = empty( get_filter_value('event_type') ) || is_seller_event_type($store_info);
+    $filter_delivery_date = empty( get_filter_value('delivery_date') ) || is_seller_delivery_date($store_info);
+	return $filter_delivery_option && $filter_state && $filter_event_type && $filter_delivery_date;
 }
 
 function is_seller_delivery_option($store_info) {
@@ -54,6 +56,12 @@ function is_seller_state($store_info) {
 	$dokan_seller_state = get_filter_value('dokan_seller_state');
     $address_state = array_key_exists('state', $store_info['address']) ? $store_info['address']['state'] : null;
     return $address_state == $dokan_seller_state;
+}
+
+function is_seller_event_type($store_info) {
+	$event_type = get_filter_value('event_type');
+    $event_type_options = array_key_exists('events', $store_info) ? $store_info['events'] : null;
+    return $event_type_options != null && $event_type_options[$event_type] == 'yes';
 }
 
 function is_seller_delivery_date($store_info) {
@@ -104,7 +112,8 @@ function is_at_least_minimum_reservation_time($store_info, $delivery_date) {
 
 function apply_seller_custom_filters( $args ) {
     add_filter_values_to_state();
-	if ( !empty( get_filter_value('dokan_seller_state') ) || !empty( get_filter_value('delivery_date') ) || !empty( get_filter_value('delivery_option') ) ) {
+	if ( !empty( get_filter_value('dokan_seller_state') ) || !empty( get_filter_value('delivery_date') )
+        || !empty( get_filter_value('delivery_option') ) || !empty( get_filter_value('event_type') ) ) {
 		$sellers_filtered = array_filter($args['sellers']['users'], "is_seller_visible");
 		$args['sellers'] = array(
 			'users' => $sellers_filtered,
@@ -125,12 +134,21 @@ function add_filter_values_to_state() {
     add_filter_value_to_state('dokan_seller_state');
     add_filter_value_to_state('delivery_date');
     add_filter_value_to_state('delivery_option');
+    add_filter_value_to_state('event_type');
 }
 
 function add_filter_value_to_state($name) {
     if (array_key_exists($name, $_REQUEST)) {
         $_SESSION['store_filter_'.$name] = !empty( $_REQUEST[$name] ) ? $_REQUEST[$name] : null;
     }
+}
+
+function add_event_type_select() {
+    $session_value = !empty( $_SESSION['store_filter_event_type'] ) ? $_SESSION['store_filter_event_type'] : null;
+    $args = array(
+        'session_value' => $session_value
+    );
+    dokan_get_template_part( 'store-list-search/store-list-event-type', '', $args );
 }
 
 ?>

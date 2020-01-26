@@ -103,3 +103,19 @@ Text Domain: elessi-theme-child
 .add_to_cart_text.store_list_loop:before {
     display: none !important;
 }
+
+.event-type-select-container:hover {
+    opacity: 0.8;
+}
+
+.event-type-select:hover {
+    opacity: 1 !important;
+}
+
+.background-green {
+    background: #008400 !important;
+}
+
+.background-gray {
+    background: #A9A9A9 !important;
+}
