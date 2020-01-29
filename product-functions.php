@@ -3,6 +3,12 @@
 /*Remove empty sku (item code) from product details page*/
 add_filter( 'wc_product_sku_enabled', '__return_false' );
 
+add_action('init', 'remove_product_action', 11);
+
+function remove_product_action() {
+    remove_action('woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_meta', 40);
+}
+
 /*Remove quickview icon from product list*/
 if (!function_exists('elessi_quickview_in_list')) :
     function elessi_quickview_in_list(){
@@ -36,5 +42,6 @@ function get_product_category_names() {
     }
     return join(', ', $names);
 }
+
 
 ?>

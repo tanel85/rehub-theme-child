@@ -111,3 +111,25 @@ Text Domain: elessi-theme-child
 .event-type-select:hover {
     opacity: 1 !important;
 }
+
+.product-lightbox {
+    max-width: 82.75862em !important;
+}
+
+.woocommerce-product-details__short-description {
+    max-height: 500px !important;
+}
+
+.product-additional-info {
+    padding-bottom: 15px;
+    color: #008400;
+}
+
+.product-additional-info:hover {
+    opacity: 0.8;
+}
+
+.product-info .entry-title a {
+    pointer-events: none;
+    cursor: default;
+}

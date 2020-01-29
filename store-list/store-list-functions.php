@@ -16,7 +16,7 @@ function add_delivery_option_dropdown() {
 }
 
 function add_state_dropdown() {
-    $session_value = !empty( $_SESSION['store_filter_dokan_seller_state'] ) ? $_SESSION['store_filter_dokan_seller_state'] : null;
+    $session_value = !empty( $_SESSION['store_filter_seller_state'] ) ? $_SESSION['store_filter_seller_state'] : null;
 
 	$country_obj   = new WC_Countries();
 	$states        = $country_obj->states['EE'];
@@ -40,7 +40,7 @@ function add_delivery_date_dropdown() {
 function is_seller_visible($seller) {
 	$store_info = dokan_get_store_info( $seller->ID );
 	$filter_delivery_option = empty( get_filter_value('delivery_option') ) || is_seller_delivery_option($store_info);
-	$filter_state = empty( get_filter_value('dokan_seller_state') ) || is_seller_state($store_info);
+	$filter_state = empty( get_filter_value('seller_state') ) || is_seller_state($store_info);
     $filter_event_type = empty( get_filter_value('event_type') ) || is_seller_event_type($store_info);
     $filter_delivery_date = empty( get_filter_value('delivery_date') ) || is_seller_delivery_date($store_info);
 	return $filter_delivery_option && $filter_state && $filter_event_type && $filter_delivery_date;
@@ -53,9 +53,9 @@ function is_seller_delivery_option($store_info) {
 }
 
 function is_seller_state($store_info) {
-	$dokan_seller_state = get_filter_value('dokan_seller_state');
+	$seller_state = get_filter_value('seller_state');
     $address_state = array_key_exists('state', $store_info['address']) ? $store_info['address']['state'] : null;
-    return $address_state == $dokan_seller_state;
+    return $address_state == $seller_state;
 }
 
 function is_seller_event_type($store_info) {
@@ -112,7 +112,7 @@ function is_at_least_minimum_reservation_time($store_info, $delivery_date) {
 
 function apply_seller_custom_filters( $args ) {
     add_filter_values_to_state();
-	if ( !empty( get_filter_value('dokan_seller_state') ) || !empty( get_filter_value('delivery_date') )
+	if ( !empty( get_filter_value('seller_state') ) || !empty( get_filter_value('delivery_date') )
         || !empty( get_filter_value('delivery_option') ) || !empty( get_filter_value('event_type') ) ) {
 		$sellers_filtered = array_filter($args['sellers']['users'], "is_seller_visible");
 		$args['sellers'] = array(
@@ -131,7 +131,7 @@ function add_filter_values_to_state() {
     if (session_id() == '' ) {
         session_start();
     }
-    add_filter_value_to_state('dokan_seller_state');
+    add_filter_value_to_state('seller_state');
     add_filter_value_to_state('delivery_date');
     add_filter_value_to_state('delivery_option');
     add_filter_value_to_state('event_type');

@@ -1,9 +1,10 @@
 <div class="dokan-w2" style="padding: 0 15px;">
+    <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Tellimus', 'dokan' ) ); ?></label>
     <select
         class="dokan-select2 dokan-form-control"
         name="delivery_option"
     >
-        <option value=""><?php echo esc_html( __( 'Order type', 'dokan-lite' ) ); ?></option>
+        <option value=""><?php echo esc_html( __( 'Vali', 'dokan' ) ); ?></option>
         <option value="1" <?php echo ( '1' === $session_value ) ? 'selected' : ''; ?>>
             <?php echo esc_html( __( 'Delivery', 'dokan-lite' ) ); ?>
         </option>

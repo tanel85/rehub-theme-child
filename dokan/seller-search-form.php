@@ -6,7 +6,13 @@
     <div class="row" style="background: #f3f3f3; padding: 40px 30px;">
     <div class="row dokan-clearfix">
         <div class="dokan-w4">
-            <input type="search" id="search" class="search-field dokan-form-control dokan-seller-search" placeholder="<?php esc_attr_e( 'Search Vendor &hellip;', 'dokan-lite' ); ?>" value="<?php echo esc_attr( $search_query ); ?>" name="dokan_seller_search" title="<?php esc_attr_e( 'Search seller &hellip;', 'dokan-lite' ); ?>" />
+            <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Otsi', 'dokan' ) ); ?></label>
+            <input type="search"
+                   id="search"
+                   class="search-field dokan-form-control dokan-seller-search"
+                   value="<?php echo esc_attr( $search_query ); ?>" name="dokan_seller_search"
+                   title="<?php esc_attr_e( 'Search seller &hellip;', 'dokan-lite' ); ?>"
+                   style="padding-bottom: 0 !important; padding-top: 0 !important; height: 33px !important;"/>
         </div>
 
         <?php do_action( 'dokan_seller_search_form', $search_query ); ?>

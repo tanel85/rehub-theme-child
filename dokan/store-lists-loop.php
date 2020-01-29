@@ -1,4 +1,4 @@
-<div id="dokan-seller-listing-wrap" class="row" style="margin-left: auto; margin-right: auto;">
+<div id="dokan-seller-listing-wrap" class="row" style="margin-left: auto; margin-right: auto; padding-bottom: 20px;">
     <div class="large-12 columns nasa-content-page-products seller-listing-content">
         <?php if ( $sellers['users'] ) : ?>
             <ul class="products list large-block-grid-4 small-block-grid-1 medium-block-grid-2" data-columns_small="1" data-columns_medium="2">
@@ -9,11 +9,6 @@
                     $store_name        = $vendor->get_shop_name();
                     $store_biography   = $vendor->get_vendor_biography();
                     $store_url         = $vendor->get_shop_url();
-                    $store_rating      = $vendor->get_rating();
-                    $is_store_featured = $vendor->is_featured();
-                    $store_phone       = $vendor->get_phone();
-                    $store_info        = dokan_get_store_info( $seller->ID );
-                    $store_address     = dokan_get_seller_short_address( $seller->ID );
                     $store_banner_url  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, 'thumbnail' ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
                     ?>
 

@@ -64,8 +64,21 @@ add_filter( 'woocommerce_states', 'custom_woocommerce_states' );
 function custom_woocommerce_states( $states ) {
 
   $states['EE'] = array(
-    'EE1' => 'Harjumaa',
-    'EE2' => 'Tartumaa'
+    'EE1' => 'Harju maakond',
+    'EE2' => 'Tartu maakond',
+    'EE3' => 'Ida-Viru maakond',
+    'EE4' => 'Pärnu maakond',
+    'EE5' => 'Lääne-Viru maakond',
+    'EE6' => 'Viljandi maakond',
+    'EE7' => 'Rapla maakond',
+    'EE8' => 'Võru maakond',
+    'EE9' => 'Saare maakond',
+    'EE10' => 'Jõgeva maakond',
+    'EE11' => 'Järva maakond',
+    'EE12' => 'Valga maakond',
+    'EE13' => 'Põlva maakond',
+    'EE14' => 'Lääne maakond',
+    'EE15' => 'Hiiu maakond'
   );
 
   return $states;
