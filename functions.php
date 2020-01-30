@@ -22,6 +22,32 @@ require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
 require_once ELESSI_CHILD_DIR . '/checkout-functions.php';
 require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 
+// Override elementor Menu_Cart widget to open the Elessi sidebar
+add_action( 'elementor/widget/render_content', function( $content, $widget ) {
+    if ( 'woocommerce-menu-cart' === $widget->get_name() ) {
+        if ( null === WC()->cart ) {
+            return '';
+        }
+        $product_count = WC()->cart->get_cart_contents_count();
+        $sub_total = WC()->cart->get_cart_subtotal();
+        $counter_attr = 'data-counter="' . $product_count . '"';
+        $content =
+            '<div class="elementor-menu-cart__wrapper">'.
+            	'<div class="elementor-menu-cart__toggle elementor-button-wrapper">'.
+			        '<a id="elementor-menu-cart__toggle_button1" href="javascript:void(0)" rel="nofollow" class="add_to_cart_button">'.
+                        '<span class="elementor-button-text">'.$sub_total.'</span>'.
+                        '<span class="elementor-button-icon" '.$counter_attr.'>'.
+                            '<i class="eicon" aria-hidden="true"></i>'.
+                        '</span>'.
+                    '</a>'.
+                '</div>'.
+            '</div>'
+        ;
+    }
+    return $content;
+}, 10, 2 );
+
+
 //save the field value
 add_action( 'dokan_store_profile_saved', 'save_extra_fields', 15 );
 function save_extra_fields( $store_id ) {
