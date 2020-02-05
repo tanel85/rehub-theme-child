@@ -54,7 +54,6 @@ $contact_email          = isset( $profile_info['contact_email'] ) ? $profile_inf
 $min_order          = isset( $profile_info['min_order'] ) ? $profile_info['min_order'] : '';
 $min_reservation_time_open          = isset( $profile_info['min_reservation_time_open'] ) ? $profile_info['min_reservation_time_open'] : '';
 $min_reservation_time_closed          = isset( $profile_info['min_reservation_time_closed'] ) ? $profile_info['min_reservation_time_closed'] : '';
-$delivery = isset( $profile_info['delivery'] ) ? $profile_info['delivery'] : '';
 
 ?>
 <?php do_action( 'dokan_settings_before_form', $current_user, $profile_info ); ?>
@@ -279,21 +278,6 @@ $delivery = isset( $profile_info['delivery'] ) ? $profile_info['delivery'] : '';
         </label>
         <div class="dokan-w3 dokan-text-left">
             <input placeholder="<?php esc_html_e( 'in hours', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_reservation_time_closed" id="min_reservation_time_closed" value="<?php echo esc_attr( $min_reservation_time_closed ); ?>" />
-        </div>
-    </div>
-
-    <div class="dokan-form-group">
-        <label class="dokan-w3 control-label" for="delivery">
-			<?php esc_html_e( 'Delivery', 'dokan-lite' ); ?>
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="delivery" class="control-label">
-                    <input type="checkbox" name="delivery" id="delivery" value="yes" <?php echo $delivery == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Offers delivery', 'dokan-lite' ); ?>
-                </label>
-            </div>
         </div>
     </div>
 

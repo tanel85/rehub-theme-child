@@ -4,7 +4,7 @@
 
 <form role="search" method="get" class="dokan-seller-search-form" action="">
     <div class="row" style="background: #f3f3f3; padding: 40px 30px;">
-    <div class="row dokan-clearfix">
+    <div class="row dokan-clearfix seller_search_form_row1">
         <div class="dokan-w4">
             <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Otsi', 'dokan' ) ); ?></label>
             <input type="search"

@@ -1,4 +1,4 @@
-<div class="dokan-w2" style="padding: 0 15px;">
+<div class="dokan-w2" style="padding: 0 15px 15px 15px;">
     <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Tellimus', 'dokan' ) ); ?></label>
     <select
         class="dokan-select2 dokan-form-control"

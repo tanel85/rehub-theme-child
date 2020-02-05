@@ -1,31 +1,31 @@
-<div style="display: flex">
-    <div style="padding: 0 15px;">
+<div class="event-type-container">
+    <div class="event-type-item">
         <div id="event_type1" class="button"
              style="padding: 12px 20px; text-transform: none; border-radius: 25px; <?php echo ( !empty($session_value) ) ? 'background: #A9A9A9 !important;' : ''; ?>">
             <?php echo esc_html( __( 'Kõik', 'dokan-lite' ) ); ?></div>
     </div>
-    <div style="padding: 0 15px;">
+    <div class="event-type-item">
         <div id="event_type2" class="button"
              style="padding: 12px 20px; text-transform: none; border-radius: 25px; <?php echo ( 'laste_synnipaev' !== $session_value ) ? 'background: #A9A9A9 !important;' : ''; ?>">
             <?php echo esc_html( __( 'Laste sünnipäev', 'dokan-lite' ) ); ?></div>
     </div>
-    <div style="padding: 0 15px;">
+    <div class="event-type-item">
         <div id="event_type3" class="button"
              style="padding: 12px 20px; text-transform: none; border-radius: 25px; <?php echo ( 'seminar' !== $session_value ) ? 'background: #A9A9A9 !important;' : ''; ?>">
             <?php echo esc_html( __( 'Seminar', 'dokan-lite' ) ); ?></div>
     </div>
-    <div style="padding: 0 15px;">
+    <div class="event-type-item">
         <div id="event_type4" class="button"
              style="padding: 12px 20px; text-transform: none; border-radius: 25px; <?php echo ( 'kohvipaus' !== $session_value ) ? 'background: #A9A9A9 !important;' : ''; ?>">
             <?php echo esc_html( __( 'Kohvipaus', 'dokan-lite' ) ); ?></div>
     </div>
-    <div style="padding: 0 15px;">
+    <div class="event-type-item">
         <div id="event_type5" class="button"
              style="padding: 12px 20px; text-transform: none; border-radius: 25px; <?php echo ( 'grill' !== $session_value ) ? 'background: #A9A9A9 !important;' : ''; ?>">
             <?php echo esc_html( __( 'Grill', 'dokan-lite' ) ); ?></div>
     </div>
 
-    <div style="padding: 0 15px;">
+    <div class="event-type-item">
         <div style="overflow:hidden; border-radius: 25px; background: #A9A9A9 !important;" class="event-type-select-container">
             <select id="event_type_select"
                     class="button event-type-select"

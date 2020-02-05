@@ -10,6 +10,8 @@
                     $store_biography   = $vendor->get_vendor_biography();
                     $store_url         = $vendor->get_shop_url();
                     $store_banner_url  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, 'thumbnail' ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
+
+                    $store_banner_url_mobile  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, $image_size ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
                     ?>
 
                     <li class="product-warp-item">
@@ -21,13 +23,14 @@
                                         <div class="product-img-wrap" style="cursor: pointer">
                                             <div class="product-img-wrap-inner">
                                                 <a href="<?php echo esc_url( $store_url ); ?>">
-                                                    <img src="<?php echo is_array( $store_banner_url ) ? esc_attr( $store_banner_url[0] ) : esc_attr( $store_banner_url ); ?>">
+                                                    <img class="comecater-store-banner-large-screen" src="<?php echo is_array( $store_banner_url ) ? esc_attr( $store_banner_url[0] ) : esc_attr( $store_banner_url ); ?>">
+                                                    <img class="comecater-store-banner-small-screen" src="<?php echo is_array( $store_banner_url_mobile ) ? esc_attr( $store_banner_url_mobile[0] ) : esc_attr( $store_banner_url_mobile ); ?>">
                                                 </a>
                                             </div>
                                         </div>
 
                                         <div class="product-info-wrap" style="cursor: pointer">
-                                            <div class="info store_list_loop">
+                                            <div class="info store_list_loop comecater-store-name">
                                                 <div class="name nasa-show-one-line">
                                                     <a href="<?php echo esc_attr( $store_url ); ?>"><?php echo esc_html( $store_name ); ?></a>
                                                 </div>

@@ -5,7 +5,6 @@
 add_filter( 'dokan_get_dashboard_settings_nav', 'load_services_menu' );
 add_filter( 'dokan_settings_content', 'load_services_template' );
 add_filter( 'dokan_dashboard_settings_heading_title', 'add_heading_title', 10, 2 );
-add_action( 'dokan_load_custom_template', 'dokan_load_services_template' );
 add_action( 'wp_ajax_dokan_seller_services', 'update_services' );
 
 function load_services_menu( $sub_settings ) {

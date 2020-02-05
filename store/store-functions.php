@@ -48,7 +48,7 @@ if(!function_exists('add_loop_product_description')) :
                 '<hr class="nasa-list-hr hidden-tag" />' .
                 '<div class="product-des">' .
                     apply_filters('woocommerce_short_description', $post->post_excerpt) .
-                    '<div class="product-additional-info">' .
+                    '<div class="product-additional-info comecater-info-link">' .
                         $read_additional_info.
                     '</div>' .
                 '</div>' .

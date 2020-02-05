@@ -15,7 +15,8 @@ if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 }
 
 define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
-require_once ELESSI_CHILD_DIR . '/seller-services/functions.php';
+require_once ELESSI_CHILD_DIR . '/settings/seller-services/functions.php';
+require_once ELESSI_CHILD_DIR . '/settings/delivery/functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
 require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
@@ -73,9 +74,6 @@ function save_extra_fields( $store_id ) {
 	if ( isset( $_POST['reg_code'] ) ) {
 		$dokan_settings['reg_code'] = $_POST['reg_code'];
 	}
-	if ( isset( $_POST['delivery'] ) ) {
-		$dokan_settings['delivery'] = $_POST['delivery'];
-	}
 	$dokan_settings['address']['country'] = 'EE';
     $dokan_settings['live_chat'] = 'yes';
     $dokan_settings['dokan_store_time_enabled'] = 'yes';
@@ -90,21 +88,23 @@ add_filter( 'woocommerce_states', 'custom_woocommerce_states' );
 function custom_woocommerce_states( $states ) {
 
   $states['EE'] = array(
-    'EE1' => 'Harju maakond',
-    'EE2' => 'Tartu maakond',
-    'EE3' => 'Ida-Viru maakond',
-    'EE4' => 'Pärnu maakond',
-    'EE5' => 'Lääne-Viru maakond',
-    'EE6' => 'Viljandi maakond',
-    'EE7' => 'Rapla maakond',
-    'EE8' => 'Võru maakond',
-    'EE9' => 'Saare maakond',
-    'EE10' => 'Jõgeva maakond',
-    'EE11' => 'Järva maakond',
-    'EE12' => 'Valga maakond',
-    'EE13' => 'Põlva maakond',
-    'EE14' => 'Lääne maakond',
-    'EE15' => 'Hiiu maakond'
+    'EE10' => 'Tallinn',
+    'EE11' => 'Harju maakond',
+    'EE20' => 'Tartu linn',
+    'EE21' => 'Tartu maakond',
+    'EE30' => 'Ida-Viru maakond',
+    'EE40' => 'Pärnu maakond',
+    'EE50' => 'Lääne-Viru maakond',
+    'EE60' => 'Viljandi maakond',
+    'EE70' => 'Rapla maakond',
+    'EE80' => 'Võru maakond',
+    'EE90' => 'Saare maakond',
+    'EE100' => 'Jõgeva maakond',
+    'EE110' => 'Järva maakond',
+    'EE120' => 'Valga maakond',
+    'EE130' => 'Põlva maakond',
+    'EE140' => 'Lääne maakond',
+    'EE150' => 'Hiiu maakond'
   );
 
   return $states;
