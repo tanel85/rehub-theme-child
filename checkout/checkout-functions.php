@@ -1,10 +1,10 @@
 <?php
 add_filter( 'woocommerce_checkout_fields' , 'default_values_checkout_fields' );
-add_filter( 'default_checkout_billing_state', 'set_default_checkout_state' );
+add_filter( 'default_checkout_billing_state', 'get_default_checkout_state' );
 add_action( 'woocommerce_after_checkout_billing_form', 'init_delivery_date' );
 
-//TODO: this disables shipping in checkout process. After we figure out how shipping is done, it's probably needed to remove this
-add_filter( 'woocommerce_cart_needs_shipping', function() {return false;});
+//With this line it's possible to disable shipping in checkout process
+//add_filter( 'woocommerce_cart_needs_shipping', function() {return false;});
 
 
 
@@ -13,18 +13,23 @@ function default_values_checkout_fields( $fields ) {
     $fields['billing']['billing_delivery']['default'] = get_session_value('store_filter_delivery_option', '1');
     $fields['billing']['billing_state']['required'] = 1;
     $fields['billing']['billing_delivery_date']['autocomplete'] = '';
+
+    $fields['billing']['billing_country']['default'] = 'EE';
+    $fields['billing']['billing_country']['class'] = ['display_none'];
+
     return $fields;
 }
 
-function set_default_checkout_state() {
-    return get_session_value('store_filter_dokan_seller_state', 'EE1');
+function get_default_checkout_state() {
+    error_log(print_r(WC()->cart, true));
+    return get_session_value('store_filter_seller_state', null);
 }
 
 function get_session_value($name, $default) {
     if (session_id() == '' ) {
         session_start();
     }
-    return !empty( $_SESSION[$name] ) ? $_SESSION[$name] : null;
+    return !empty( $_SESSION[$name] ) ? $_SESSION[$name] : $default;
 }
 
 

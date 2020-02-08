@@ -20,7 +20,8 @@ require_once ELESSI_CHILD_DIR . '/settings/delivery/functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
 require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
-require_once ELESSI_CHILD_DIR . '/checkout-functions.php';
+require_once ELESSI_CHILD_DIR . '/checkout/checkout-functions.php';
+require_once ELESSI_CHILD_DIR . '/checkout/checkout-shipping-functions.php';
 require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 
 // Override elementor Menu_Cart widget to open the Elessi sidebar
@@ -206,7 +207,7 @@ function dokan_remove_unneeded_vendor_menu( $menus ) {
 }
 
 function dokan_remove_unneeded_settings_menu( $menus ) {
-	unset($menus['shipping']);
+//	unset($menus['shipping']);
 	unset($menus['social']);
 	unset($menus['seo']);
 	return $menus;

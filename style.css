@@ -159,3 +159,7 @@ Text Domain: elessi-theme-child
     pointer-events: none;
     cursor: default;
 }
+
+.display_none {
+    display: none !important;
+}

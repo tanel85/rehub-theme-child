@@ -1,14 +1,4 @@
 <?php
-/**
- *
- * The template for displaying product content within loops
- *
- *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 3.4.0
- */
 global $product, $nasa_opt, $nasa_animated_products;
 if (empty($product) || !$product->is_visible()) :
     return;
