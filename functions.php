@@ -16,12 +16,10 @@ if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 
 define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
 require_once ELESSI_CHILD_DIR . '/settings/seller-services/functions.php';
-require_once ELESSI_CHILD_DIR . '/settings/delivery/functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
 require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
 require_once ELESSI_CHILD_DIR . '/checkout/checkout-functions.php';
-require_once ELESSI_CHILD_DIR . '/checkout/checkout-shipping-functions.php';
 require_once ELESSI_CHILD_DIR . '/store-list/store-list-functions.php';
 
 // Override elementor Menu_Cart widget to open the Elessi sidebar

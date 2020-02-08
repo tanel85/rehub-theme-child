@@ -3,9 +3,6 @@ add_filter( 'woocommerce_checkout_fields' , 'default_values_checkout_fields' );
 add_filter( 'default_checkout_billing_state', 'get_default_checkout_state' );
 add_action( 'woocommerce_after_checkout_billing_form', 'init_delivery_date' );
 
-//With this line it's possible to disable shipping in checkout process
-//add_filter( 'woocommerce_cart_needs_shipping', function() {return false;});
-
 
 
 function default_values_checkout_fields( $fields ) {
@@ -21,7 +18,6 @@ function default_values_checkout_fields( $fields ) {
 }
 
 function get_default_checkout_state() {
-    error_log(print_r(WC()->cart, true));
     return get_session_value('store_filter_seller_state', null);
 }
 
