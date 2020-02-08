@@ -251,4 +251,17 @@ function register_nonce_check() {
     return false;
 }
 
+function add_login_logout_register_menu( $items, $args ) {
+
+    if ( !is_user_logged_in() ) {
+        $items = preg_replace('/<li.*my-account.*li>/', '', $items);
+        $label = '' . __( 'Log In' ) . '';
+        $items.= '' . '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1046"><a href="https://comecater.ee/my-account/" data-enable="1" class="elementor-item nasa-login-register-ajax">'.$label.'</a></li>' . '';
+    }
+
+    return $items;
+}
+
+add_filter( 'wp_nav_menu_items', 'add_login_logout_register_menu', 199, 2 );
+
 ?>
