@@ -9,7 +9,7 @@ add_action( 'wp_ajax_dokan_seller_services', 'update_services' );
 
 function load_services_menu( $sub_settings ) {
 	$sub_settings['services'] = array(
-		'title'      => __( 'Services', 'dokan-lite' ),
+		'title'      => __( 'Sündmused', 'dokan-lite' ),
 		'icon'       => '<i class="fa fa-user"></i>',
 		'url'        => dokan_get_navigation_url( 'settings/services' ),
 		'pos'        => 31,
@@ -30,7 +30,7 @@ function load_services_template() {
 
 function add_heading_title( $header, $query_vars ) {
 	if ( 'services' === $query_vars ) {
-		$header = __( 'Services', 'dokan-lite' );
+		$header = __( 'Sündmused', 'dokan-lite' );
 	}
 	return $header;
 }
@@ -54,38 +54,22 @@ function update_services() {
 	$store_id = dokan_get_current_user_id();
 	$dokan_settings = dokan_get_store_info($store_id);
 
-	$food_options = array(
-		'breakfast'   => $post_data['breakfast'],
-		'lunch'   => $post_data['lunch'],
-		'hot_buffet'   => $post_data['hot_buffet'],
-		'cold_buffet'   => $post_data['cold_buffet'],
-		'appetizer'   => $post_data['appetizer'],
-		'dessert'   => $post_data['dessert']
-	);
     $events = array(
-		'seminar'   => $post_data['seminar'],
 		'laste_synnipaev'   => $post_data['laste_synnipaev'],
-		'kohvipaus'   => $post_data['kohvipaus'],
-		'grill'   => $post_data['grill'],
-		'konverents'   => $post_data['konverents'],
+        'kohvipaus'   => $post_data['kohvipaus'],
+        'yhine_louna'   => $post_data['yhine_louna'],
+		'firma_pidu'   => $post_data['firma_pidu'],
+		'hommikusook'   => $post_data['hommikusook'],
+		'grillpidu'   => $post_data['grillpidu'],
 		'synnipaev'   => $post_data['synnipaev'],
-		'louna_kontoris'   => $post_data['louna_kontoris']
-	);
-	$diets = array(
-		'vegan'   => $post_data['vegan'],
-		'vegetarian'   => $post_data['vegetarian'],
-		'gluten_free'   => $post_data['gluten_free']
-	);
-	$additional_services = array(
-		'cutlery'   => $post_data['cutlery'],
-		'tables'   => $post_data['tables'],
-		'servicing'   => $post_data['servicing']
+		'peielaud'   => $post_data['peielaud'],
+		'pidulik_ohtusook'   => $post_data['pidulik_ohtusook'],
+		'konverents'   => $post_data['konverents'],
+		'bankett'   => $post_data['bankett'],
+		'pulm'   => $post_data['pulm']
 	);
 
-	$dokan_settings['food_options'] = $food_options;
 	$dokan_settings['events'] = $events;
-	$dokan_settings['diets'] = $diets;
-	$dokan_settings['additional_services'] = $additional_services;
 	update_user_meta( $store_id, 'dokan_profile_settings', $dokan_settings );
 
 

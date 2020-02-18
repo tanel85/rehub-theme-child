@@ -12,7 +12,7 @@ $status                 = '1';
 
             <?php echo $reviews_list_component->add_or_edit_review(); ?>
 
-            <h2 class="headline"><?php _e( 'Reviews for', 'dokan' ); echo ' '.$store_info->get_shop_name(); ?></h2>
+            <h2 class="headline"><?php _e( 'Hinnangud cateringile ', 'dokan' ); echo ' '.$store_info->get_shop_name(); ?></h2>
 
             <ol class="commentlist">
                 <?php echo $reviews_list_component->get_ratings_list($store_info->id); ?>

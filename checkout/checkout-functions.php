@@ -2,6 +2,8 @@
 add_filter( 'woocommerce_checkout_fields' , 'default_values_checkout_fields' );
 add_filter( 'default_checkout_billing_state', 'get_default_checkout_state' );
 add_action( 'woocommerce_after_checkout_billing_form', 'init_delivery_date' );
+add_filter( 'woocommerce_shipping_rate_label', 'localize_shipping_rate_label' );
+add_filter( 'wcss_display_share_button', 'remove_button_class_from_share_button' );
 
 
 
@@ -57,6 +59,14 @@ function init_delivery_date() {
             }
         });
     </script>';
+}
+
+function localize_shipping_rate_label($label) {
+    return _e($label, 'dokan');
+}
+
+function remove_button_class_from_share_button($share_button) {
+    return str_replace('button wcss-btn', 'wcss-btn', $share_button);
 }
 
 ?>

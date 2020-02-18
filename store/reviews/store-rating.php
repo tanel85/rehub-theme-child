@@ -52,7 +52,7 @@ class Store_Rating {
         $vendor = dokan()->vendor->get( $seller_id );
         $rating = $vendor->get_rating();
         if ( ! $rating['count'] ) {
-            $html = __( 'No reviews found yet!', 'dokan-lite' );
+            $html = __( 'Hinnanguid ei ole veel lisatud!', 'dokan-lite' );
         } else {
             $review_text = '';
             if ($number_only == true) {

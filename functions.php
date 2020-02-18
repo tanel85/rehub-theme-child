@@ -16,6 +16,7 @@ if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 
 define( 'ELESSI_CHILD_DIR', dirname( __FILE__ ) );
 require_once ELESSI_CHILD_DIR . '/settings/seller-services/functions.php';
+require_once ELESSI_CHILD_DIR . '/settings/orders/order-functions.php';
 require_once ELESSI_CHILD_DIR . '/registration-functions.php';
 require_once ELESSI_CHILD_DIR . '/product-functions.php';
 require_once ELESSI_CHILD_DIR . '/store/store-functions.php';
@@ -200,7 +201,7 @@ function render_biography_form() {
 
 
 function dokan_remove_unneeded_vendor_menu( $menus ) {
-	unset($menus['coupons']);
+//	unset($menus['coupons']);
 	return $menus;
 }
 

@@ -1,5 +1,5 @@
 <div class="dokan-w2" style="padding: 0 15px;">
-    <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Kuna', 'dokan' ) ); ?></label>
+    <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Ürituse aeg', 'dokan' ) ); ?></label>
     <input class="delivery_date" name="delivery_date" id="delivery_date" type="text" style="position: relative; height: 33px;">
 </div>
 

@@ -61,7 +61,7 @@ function is_seller_state($store_info) {
 function is_seller_event_type($store_info) {
 	$event_type = get_filter_value('event_type');
     $event_type_options = array_key_exists('events', $store_info) ? $store_info['events'] : null;
-    return $event_type_options != null && $event_type_options[$event_type] == 'yes';
+    return $event_type_options != null && isset($event_type_options[$event_type]) && $event_type_options[$event_type] == 'yes';
 }
 
 function is_seller_delivery_date($store_info) {

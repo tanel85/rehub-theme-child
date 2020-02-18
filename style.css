@@ -163,3 +163,43 @@ Text Domain: elessi-theme-child
 .display_none {
     display: none !important;
 }
+
+.ui-datepicker-buttonpane {
+    text-align: center;
+}
+
+.ui-datepicker-current {
+    background: #008400 !important;
+    opacity: 1 !important;
+    display:none;
+}
+
+.ui-datepicker-close {
+    background: #008400 !important;
+    float: unset !important;
+}
+
+.ui-datepicker-current:hover {
+    opacity: 0.8 !important;
+}
+
+.ui-datepicker-close:hover {
+    opacity: 0.8;
+}
+
+.pe-7s-close {
+    border-color: red !important;
+    color: red !important;
+}
+
+.wcss-btn {
+    background: gray !important;
+}
+
+.wc-proceed-to-checkout {
+    float: left;
+}
+
+.dokan-live-chat > span {
+    z-index: 99 !important;
+}

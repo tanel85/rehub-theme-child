@@ -1,118 +1,21 @@
 <?php
 
-//hommikusöök, lõuna, soe buffee, külm buffee, suupisted, magus
-
-$food_option_breakfast = isset( $profile_info['food_options']['breakfast'] ) ? $profile_info['food_options']['breakfast'] : '';
-$food_option_lunch = isset( $profile_info['food_options']['lunch'] ) ? $profile_info['food_options']['lunch'] : '';
-$food_option_hot_buffet = isset( $profile_info['food_options']['hot_buffet'] ) ? $profile_info['food_options']['hot_buffet'] : '';
-$food_option_cold_buffet = isset( $profile_info['food_options']['cold_buffet'] ) ? $profile_info['food_options']['cold_buffet'] : '';
-$food_option_appetizer = isset( $profile_info['food_options']['appetizer'] ) ? $profile_info['food_options']['appetizer'] : '';
-$food_option_dessert = isset( $profile_info['food_options']['dessert'] ) ? $profile_info['food_options']['dessert'] : '';
-
-$event_seminar = isset( $profile_info['events']['seminar'] ) ? $profile_info['events']['seminar'] : '';
 $event_laste_synnipaev = isset( $profile_info['events']['laste_synnipaev'] ) ? $profile_info['events']['laste_synnipaev'] : '';
 $event_kohvipaus = isset( $profile_info['events']['kohvipaus'] ) ? $profile_info['events']['kohvipaus'] : '';
-$event_grill = isset( $profile_info['events']['grill'] ) ? $profile_info['events']['grill'] : '';
-$event_konverents = isset( $profile_info['events']['konverents'] ) ? $profile_info['events']['konverents'] : '';
+$event_yhine_louna = isset( $profile_info['events']['yhine_louna'] ) ? $profile_info['events']['yhine_louna'] : '';
+$event_firma_pidu = isset( $profile_info['events']['firma_pidu'] ) ? $profile_info['events']['firma_pidu'] : '';
+$event_hommikusook = isset( $profile_info['events']['hommikusook'] ) ? $profile_info['events']['hommikusook'] : '';
+$event_grillpidu = isset( $profile_info['events']['grillpidu'] ) ? $profile_info['events']['grillpidu'] : '';
 $event_synnipaev = isset( $profile_info['events']['synnipaev'] ) ? $profile_info['events']['synnipaev'] : '';
-$event_louna_kontoris = isset( $profile_info['events']['louna_kontoris'] ) ? $profile_info['events']['louna_kontoris'] : '';
+$event_peielaud = isset( $profile_info['events']['peielaud'] ) ? $profile_info['events']['peielaud'] : '';
+$event_pidulik_ohtusook = isset( $profile_info['events']['pidulik_ohtusook'] ) ? $profile_info['events']['pidulik_ohtusook'] : '';
+$event_konverents = isset( $profile_info['events']['konverents'] ) ? $profile_info['events']['konverents'] : '';
+$event_bankett = isset( $profile_info['events']['bankett'] ) ? $profile_info['events']['bankett'] : '';
+$event_pulm = isset( $profile_info['events']['pulm'] ) ? $profile_info['events']['pulm'] : '';
 
-$diet_vegan = isset( $profile_info['diets']['vegan'] ) ? $profile_info['diets']['vegan'] : '';
-$diet_vegetarian = isset( $profile_info['diets']['vegetarian'] ) ? $profile_info['diets']['vegetarian'] : '';
-$diet_gluten_free = isset( $profile_info['diets']['gluten_free'] ) ? $profile_info['diets']['gluten_free'] : '';
-
-$additional_service_cutlery = isset( $profile_info['additional_services']['cutlery'] ) ? $profile_info['additional_services']['cutlery'] : '';
-$additional_service_tables = isset( $profile_info['additional_services']['tables'] ) ? $profile_info['additional_services']['tables'] : '';
-$additional_service_servicing = isset( $profile_info['additional_services']['servicing'] ) ? $profile_info['additional_services']['servicing'] : '';
 ?>
 <form method="post" id="services-form"  action="" class="dokan-form-horizontal">
 	<?php wp_nonce_field( 'vendor_services_nonce' ); ?>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-			<?php esc_html_e( 'Food options', 'dokan-lite' ); ?>
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="breakfast" class="control-label">
-                    <input type="checkbox" name="breakfast" id="breakfast" value="yes" <?php echo $food_option_breakfast == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Breakfast', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="lunch" class="control-label">
-                    <input type="checkbox" name="lunch" id="lunch" value="yes" <?php echo $food_option_lunch == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Lunch', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="hot_buffet" class="control-label">
-                    <input type="checkbox" name="hot_buffet" id="hot_buffet" value="yes" <?php echo $food_option_hot_buffet == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Hot buffet', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="cold_buffet" class="control-label">
-                    <input type="checkbox" name="cold_buffet" id="cold_buffet" value="yes" <?php echo $food_option_cold_buffet == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Cold buffet', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="appetizer" class="control-label">
-                    <input type="checkbox" name="appetizer" id="appetizer" value="yes" <?php echo $food_option_appetizer == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Appetizers', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="dessert" class="control-label">
-                    <input type="checkbox" name="dessert" id="dessert" value="yes" <?php echo $food_option_dessert == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Dessert', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
 
 <!--    Events -->
     <div class="dokan-form-group service-group">
@@ -136,23 +39,9 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 
         <div class="dokan-w5 dokan-text-left dokan_tock_check">
             <div class="checkbox">
-                <label for="seminar" class="control-label">
-                    <input type="checkbox" name="seminar" id="seminar" value="yes" <?php echo $event_seminar == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Seminar', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
                 <label for="kohvipaus" class="control-label">
                     <input type="checkbox" name="kohvipaus" id="kohvipaus" value="yes" <?php echo $event_kohvipaus == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Kohvipaus', 'dokan-lite' ); ?>
+                    <?php esc_html_e( 'Kohvipaus', 'dokan-lite' ); ?>
                 </label>
             </div>
         </div>
@@ -164,9 +53,93 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 
         <div class="dokan-w5 dokan-text-left dokan_tock_check">
             <div class="checkbox">
-                <label for="grill" class="control-label">
-                    <input type="checkbox" name="grill" id="grill" value="yes" <?php echo $event_grill == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Grill', 'dokan-lite' ); ?>
+                <label for="yhine_louna" class="control-label">
+                    <input type="checkbox" name="yhine_louna" id="yhine_louna" value="yes" <?php echo $event_yhine_louna == 'yes' ? 'checked': ''; ?>>
+                    <?php esc_html_e( 'Ühine lõuna', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="firma_pidu" class="control-label">
+                    <input type="checkbox" name="firma_pidu" id="firma_pidu" value="yes" <?php echo $event_firma_pidu == 'yes' ? 'checked': ''; ?>>
+					<?php esc_html_e( 'Firma pidu', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="hommikusook" class="control-label">
+                    <input type="checkbox" name="hommikusook" id="hommikusook" value="yes" <?php echo $event_hommikusook == 'yes' ? 'checked': ''; ?>>
+                    <?php esc_html_e( 'Hommikusöök', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="grillpidu" class="control-label">
+                    <input type="checkbox" name="grillpidu" id="grillpidu" value="yes" <?php echo $event_grillpidu == 'yes' ? 'checked': ''; ?>>
+					<?php esc_html_e( 'Grillpidu', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="synnipaev" class="control-label">
+                    <input type="checkbox" name="synnipaev" id="synnipaev" value="yes" <?php echo $event_synnipaev == 'yes' ? 'checked': ''; ?>>
+                    <?php esc_html_e( 'Sünnipäev', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="peielaud" class="control-label">
+                    <input type="checkbox" name="peielaud" id="peielaud" value="yes" <?php echo $event_peielaud == 'yes' ? 'checked': ''; ?>>
+                    <?php esc_html_e( 'Peielaud', 'dokan-lite' ); ?>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="dokan-form-group service-group">
+        <label class="dokan-w3 control-label" for="">
+        </label>
+
+        <div class="dokan-w5 dokan-text-left dokan_tock_check">
+            <div class="checkbox">
+                <label for="pidulik_ohtusook" class="control-label">
+                    <input type="checkbox" name="pidulik_ohtusook" id="pidulik_ohtusook" value="yes" <?php echo $event_pidulik_ohtusook == 'yes' ? 'checked': ''; ?>>
+                    <?php esc_html_e( 'Pidulik õhtusöök', 'dokan-lite' ); ?>
                 </label>
             </div>
         </div>
@@ -192,9 +165,9 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 
         <div class="dokan-w5 dokan-text-left dokan_tock_check">
             <div class="checkbox">
-                <label for="synnipaev" class="control-label">
-                    <input type="checkbox" name="synnipaev" id="synnipaev" value="yes" <?php echo $event_synnipaev == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Sünnipäev', 'dokan-lite' ); ?>
+                <label for="bankett" class="control-label">
+                    <input type="checkbox" name="bankett" id="bankett" value="yes" <?php echo $event_bankett == 'yes' ? 'checked': ''; ?>>
+					<?php esc_html_e( 'Bankett', 'dokan-lite' ); ?>
                 </label>
             </div>
         </div>
@@ -206,99 +179,9 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 
         <div class="dokan-w5 dokan-text-left dokan_tock_check">
             <div class="checkbox">
-                <label for="louna_kontoris" class="control-label">
-                    <input type="checkbox" name="louna_kontoris" id="louna_kontoris" value="yes" <?php echo $event_louna_kontoris == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Lõuna kontoris', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-
-<!--    Diet-->
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-	        <?php esc_html_e( 'Dietary restrictions', 'dokan-lite' ); ?>
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="vegan" class="control-label">
-                    <input type="checkbox" name="vegan" id="vegan" value="yes" <?php echo $diet_vegan == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Vegan', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="vegetarian" class="control-label">
-                    <input type="checkbox" name="vegetarian" id="vegetarian" value="yes" <?php echo $diet_vegetarian == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Vegetarian', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="gluten_free" class="control-label">
-                    <input type="checkbox" name="gluten_free" id="gluten_free" value="yes" <?php echo $diet_gluten_free == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Gluten free', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-
-<!--    Additional services-->
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-	        <?php esc_html_e( 'Additional services', 'dokan-lite' ); ?>
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="cutlery" class="control-label">
-                    <input type="checkbox" name="cutlery" id="cutlery" value="yes" <?php echo $additional_service_cutlery == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Cutlery', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group service-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="tables" class="control-label">
-                    <input type="checkbox" name="tables" id="tables" value="yes" <?php echo $additional_service_tables == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Tables', 'dokan-lite' ); ?>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="dokan-form-group">
-        <label class="dokan-w3 control-label" for="">
-        </label>
-
-        <div class="dokan-w5 dokan-text-left dokan_tock_check">
-            <div class="checkbox">
-                <label for="servicing" class="control-label">
-                    <input type="checkbox" name="servicing" id="servicing" value="yes" <?php echo $additional_service_servicing == 'yes' ? 'checked': ''; ?>>
-					<?php esc_html_e( 'Servicing', 'dokan-lite' ); ?>
+                <label for="pulm" class="control-label">
+                    <input type="checkbox" name="pulm" id="pulm" value="yes" <?php echo $event_pulm == 'yes' ? 'checked': ''; ?>>
+					<?php esc_html_e( 'Pulm', 'dokan-lite' ); ?>
                 </label>
             </div>
         </div>
@@ -306,7 +189,7 @@ $additional_service_servicing = isset( $profile_info['additional_services']['ser
 
 	<div class="dokan-form-group">
 		<div class="dokan-w4 ajax_prev dokan-text-left" style="margin-left:24%;">
-			<input type="submit" id="update_services" name="update_services" class="dokan-btn dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Update Services', 'dokan-lite' ); ?>">
+			<input type="submit" id="update_services" name="update_services" class="dokan-btn dokan-btn-danger dokan-btn-theme" value="<?php esc_attr_e( 'Salvesta sündmused', 'dokan-lite' ); ?>">
 		</div>
 	</div>
 </form>

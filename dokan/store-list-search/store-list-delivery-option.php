@@ -1,15 +1,15 @@
 <div class="dokan-w2" style="padding: 0 15px 15px 15px;">
-    <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Tellimus', 'dokan' ) ); ?></label>
+    <label style="padding-bottom: 5px;"><?php echo esc_html( __( 'Kohaletoimetamine', 'dokan' ) ); ?></label>
     <select
         class="dokan-select2 dokan-form-control"
         name="delivery_option"
     >
-        <option value=""><?php echo esc_html( __( 'Vali', 'dokan' ) ); ?></option>
-        <option value="1" <?php echo ( '1' === $session_value ) ? 'selected' : ''; ?>>
-            <?php echo esc_html( __( 'Delivery', 'dokan-lite' ) ); ?>
-        </option>
+<!--        <option value="">--><?php //echo esc_html( __( 'Vali', 'dokan' ) ); ?><!--</option>-->
         <option value="2" <?php echo ( '2' === $session_value ) ? 'selected' : ''; ?>>
-            <?php echo esc_html( __( 'Takeout', 'dokan-lite' ) ); ?>
+            <?php echo esc_html( __( 'Tulen ise järele', 'dokan-lite' ) ); ?>
+        </option>
+        <option value="1" <?php echo ( '1' === $session_value ) ? 'selected' : ''; ?>>
+            <?php echo esc_html( __( 'Soovin kohaletoomist', 'dokan-lite' ) ); ?>
         </option>
     </select>
 </div>
