@@ -72,7 +72,7 @@ $min_reservation_time_closed          = isset( $profile_info['min_reservation_ti
 
     <div class="dokan-form-group">
         <label class="dokan-w3 dokan-control-label" for="main_user_name">
-			<?php esc_html_e( 'Main user name', 'dokan-lite' ); ?>
+			<?php esc_html_e( 'Peakasutaja nimi', 'dokan-lite' ); ?>
         </label>
         <div class="dokan-w5 dokan-text-left">
             <input type="text" class="dokan-form-control" required name="main_user_name" id="main_user_name" placeholder="<?php esc_attr_e( 'Mainuser Name', 'dokan-lite' ); ?>" value="<?php echo esc_attr( $main_user_name ); ?>" />
@@ -99,7 +99,7 @@ $min_reservation_time_closed          = isset( $profile_info['min_reservation_ti
 
     <br />
     <header class="dokan-dashboard-header" style="text-align:left;">
-        <h1 class="entry-title"><span><?php esc_attr_e( 'Profile information', 'dokan-lite' ); ?></span></h1>
+        <h1 class="entry-title"><span><?php esc_attr_e( 'Profiili info', 'dokan-lite' ); ?></span></h1>
     </header>
 
     <div class="dokan-banner">
@@ -208,7 +208,7 @@ $min_reservation_time_closed          = isset( $profile_info['min_reservation_ti
 
     <br />
     <header class="dokan-dashboard-header" style="text-align:left;">
-        <h1 class="entry-title"><span><?php esc_attr_e( 'Opening times', 'dokan-lite' ); ?></span></h1>
+        <h1 class="entry-title"><span><?php esc_attr_e( 'Lahtioleku ajad', 'dokan-lite' ); ?></span></h1>
     </header>
 
 	<?php if ( $show_store_open_close == 'on' ) : ?>
@@ -251,39 +251,39 @@ $min_reservation_time_closed          = isset( $profile_info['min_reservation_ti
 
     <br />
     <header class="dokan-dashboard-header" style="text-align:left;">
-        <h1 class="entry-title"><span><?php esc_attr_e( 'Ordering information', 'dokan-lite' ); ?></span></h1>
+        <h1 class="entry-title"><span><?php esc_attr_e( 'Tellimuste andmed', 'dokan-lite' ); ?></span></h1>
     </header>
 
     <div class="dokan-form-group">
         <label class="dokan-w3 dokan-control-label" for="min_order">
-            <?php esc_html_e( 'Minimum order value', 'dokan-lite' ); ?>
+            <?php esc_html_e( 'Minimaalne tellimuse väärtus', 'dokan-lite' ); ?>
         </label>
         <div class="dokan-w3 dokan-text-left">
-            <input placeholder="<?php esc_html_e( 'in euros', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_order" id="min_order" value="<?php echo esc_attr( $min_order ); ?>" />
+            <input placeholder="<?php esc_html_e( 'eurodes', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_order" id="min_order" value="<?php echo esc_attr( $min_order ); ?>" />
         </div>
     </div>
 
     <div class="dokan-form-group">
         <label class="dokan-w3 dokan-control-label" for="min_reservation_time_open">
-            <?php esc_html_e( 'Minimum reservation time when open', 'dokan-lite' ); ?>
+            <?php esc_html_e( 'Minimaalne ettetellimise aeg lahtioleku aegadel', 'dokan-lite' ); ?>
         </label>
         <div class="dokan-w3 dokan-text-left">
-            <input placeholder="<?php esc_html_e( 'in hours', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_reservation_time_open" id="min_reservation_time_open" value="<?php echo esc_attr( $min_reservation_time_open ); ?>" />
+            <input placeholder="<?php esc_html_e( 'tundides', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_reservation_time_open" id="min_reservation_time_open" value="<?php echo esc_attr( $min_reservation_time_open ); ?>" />
         </div>
     </div>
 
     <div class="dokan-form-group">
         <label class="dokan-w3 dokan-control-label" for="min_reservation_time_closed">
-            <?php esc_html_e( 'Minimum reservation time when closed', 'dokan-lite' ); ?>
+            <?php esc_html_e( 'Minimaalne ettetellimise aeg väljaspool tööaega', 'dokan-lite' ); ?>
         </label>
         <div class="dokan-w3 dokan-text-left">
-            <input placeholder="<?php esc_html_e( 'in hours', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_reservation_time_closed" id="min_reservation_time_closed" value="<?php echo esc_attr( $min_reservation_time_closed ); ?>" />
+            <input placeholder="<?php esc_html_e( 'tundides', 'dokan-lite' ); ?>" type="number" class="dokan-form-control" name="min_reservation_time_closed" id="min_reservation_time_closed" value="<?php echo esc_attr( $min_reservation_time_closed ); ?>" />
         </div>
     </div>
 
     <br />
     <header class="dokan-dashboard-header" style="text-align:left;">
-        <h1 class="entry-title"><span><?php esc_attr_e( 'Vacation', 'dokan-lite' ); ?></span></h1>
+        <h1 class="entry-title"><span><?php esc_attr_e( 'Tellimuste peatamine', 'dokan-lite' ); ?></span></h1>
     </header>
 
 	<?php do_action( 'dokan_settings_form_bottom', $current_user, $profile_info ); ?>

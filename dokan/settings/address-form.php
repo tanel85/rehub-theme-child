@@ -19,7 +19,7 @@ $address_state   = isset( $profile_info['address']['state'] ) ? $profile_info['a
 <input type="hidden" id="dokan_selected_country" value="<?php echo esc_attr( $address_country )?>" />
 <input type="hidden" id="dokan_selected_state" value="<?php echo esc_attr( $address_state ); ?>" />
 <div class="dokan-form-group">
-	<label class="dokan-w3 dokan-control-label" for="setting_address"><?php esc_html_e( 'Address', 'dokan-lite' ); ?></label>
+	<label class="dokan-w3 dokan-control-label" for="setting_address"><?php esc_html_e( 'Address', 'dokan' ); ?></label>
 
 	<div class="dokan-w5 dokan-text-left dokan-address-fields">
 		<?php if ( $seller_address_fields['street_1'] ) { ?>

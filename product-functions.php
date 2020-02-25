@@ -7,6 +7,20 @@ add_action('init', 'remove_product_action', 11);
 
 function remove_product_action() {
     remove_action('woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_meta', 40);
+    if (class_exists('Dokan_Pro_Products')) {
+        remove_action( 'dokan_product_edit_after_inventory_variants', array(
+            Dokan_Pro_Products::init(),
+            'load_shipping_tax_content'
+        ), 10, 2 );
+        remove_action( 'dokan_product_edit_after_inventory_variants', array(
+            Dokan_Pro_Products::init(),
+            'load_variations_content'
+        ), 20, 2 );
+        remove_action( 'dokan_product_edit_after_inventory_variants', array(
+            Dokan_Pro_Products::init(),
+            'load_lot_discount_content'
+        ), 25, 2 );
+    }
 }
 
 /*Remove quickview icon from product list*/

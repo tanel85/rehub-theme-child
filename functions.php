@@ -201,7 +201,7 @@ function render_biography_form() {
 
 
 function dokan_remove_unneeded_vendor_menu( $menus ) {
-//	unset($menus['coupons']);
+	unset($menus['withdraw']);
 	return $menus;
 }
 
@@ -225,7 +225,7 @@ function set_vendor_settings_help_texts() {
 	$help_text = '';
 
 	if ( isset( $wp->query_vars['settings'] ) && $wp->query_vars['settings'] == 'payment' ) {
-		$help_text = __( 'Tanel: we can add help texts in menu items headers if needed.', 'dokan-lite' );
+//		$help_text = __( 'Tanel: we can add help texts in menu items headers if needed.', 'dokan-lite' );
 	}
 
 	if ( $help_text = apply_filters( 'dokan_dashboard_settings_helper_text', $help_text, $wp->query_vars['settings'] ) ) {

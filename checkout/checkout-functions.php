@@ -4,6 +4,8 @@ add_filter( 'default_checkout_billing_state', 'get_default_checkout_state' );
 add_action( 'woocommerce_after_checkout_billing_form', 'init_delivery_date' );
 add_filter( 'woocommerce_shipping_rate_label', 'localize_shipping_rate_label' );
 add_filter( 'wcss_display_share_button', 'remove_button_class_from_share_button' );
+add_action( 'woocommerce_form_field_text','add_checkout_custom_headers', 10, 2 );
+add_action( 'woocommerce_form_field_textarea','add_checkout_custom_headers', 10, 2 );
 
 
 
@@ -67,6 +69,21 @@ function localize_shipping_rate_label($label) {
 
 function remove_button_class_from_share_button($share_button) {
     return str_replace('button wcss-btn', 'wcss-btn', $share_button);
+}
+
+function add_checkout_custom_headers( $field, $key ){
+    if ( is_checkout() ) {
+        if ($key == 'billing_address_1') {
+            $field .= '<h3>' . __('Millal') . '</h3>';
+        }
+        if ($key == 'billing_delivery_date') {
+            $field .= '<h3>' . __('Lisainfo') . '</h3>';
+        }
+        if ($key == 'billing_order_comments') {
+            $field .= '<h3>' . __('Arveldus') . '</h3>';
+        }
+    }
+    return $field;
 }
 
 ?>

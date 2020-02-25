@@ -109,8 +109,6 @@ Text Domain: elessi-theme-child
 
 #billing_delivery_date_field {
     width: 49%;
-    padding-right: 2%;
-    float: right;
 }
 
 #billing_delivery_field {
@@ -202,4 +200,29 @@ Text Domain: elessi-theme-child
 
 .dokan-live-chat > span {
     z-index: 99 !important;
+}
+
+#mceu_0-open, #mceu_0-button, #mceu_1-button, #mceu_2-button, #mceu_3-button, #mceu_4-button, #mceu_5-button, #mceu_6-button, #mceu_7-button, #mceu_8-button, #mceu_9-button, #mceu_10-button, #mceu_11-button, #mceu_12-button, #mceu_13-button {
+    background-color: white !important;
+}
+
+.mce-txt {
+    color: black !important;
+}
+
+#wp-post_content-editor-container button {
+    background-color: white !important;
+}
+
+.mce-btn.mce-active, .mce-btn.mce-active button, .mce-btn.mce-active i, .mce-btn.mce-active:hover button, .mce-btn.mce-active:hover i {
+    color: #555d66 !important;
+}
+
+.wc-order-totals {
+    margin-top: 30px;
+}
+
+a.invoice {
+    background-color: inherit !important;
+    padding: 5px;
 }
