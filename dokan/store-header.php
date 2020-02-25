@@ -4,6 +4,7 @@ $store_info               = $store_user->get_shop_info();
 $social_info              = $store_user->get_social_profiles();
 $store_tabs               = dokan_get_store_tabs( $store_user->get_id() );
 $social_fields            = dokan_get_social_profile_fields();
+$store_min_order          = $store_user->get_min_order();
 
 $dokan_appearance         = get_option( 'dokan_appearance' );
 $profile_layout           = empty( $dokan_appearance['store_header_template'] ) ? 'default' : $dokan_appearance['store_header_template'];
@@ -73,15 +74,22 @@ if ( 'layout3' === $profile_layout ) {
                     </div>
                     <div class="profile-info-inner-second">
                         <ul class="dokan-store-info">
-                            <?php if ( isset( $store_address ) && !empty( $store_address ) ) { ?>
-                                <li class="dokan-store-address store_header_details"><i style="margin-left: -20px;" class="fa fa-map-marker"></i>
-                                    <?php echo $store_address; ?>
-                                </li>
-                            <?php } ?>
 
                             <li class="dokan-store-rating store_header_details" style="margin-left: -20px;">
                                 <?php echo Store_Rating::init()->get_readable_rating( $store_user->get_id() ); ?>
                             </li>
+
+                            <?php if ( isset( $store_address ) && !empty( $store_address ) ) { ?>
+                                <li class="dokan-store-address store_header_details" style="padding-bottom: 0px;"><i style="margin-left: -20px;" class="fa fa-map-marker"></i>
+                                    <?php echo $store_address; ?>
+                                </li>
+                            <?php } ?>
+
+                            <?php if ( isset( $store_min_order ) && !empty( $store_min_order ) ) { ?>
+                                <li class="dokan-store-address store_header_details"><i style="margin-left: -20px;" class="fa fa-eur"></i>
+                                    <?php echo __('Min. tellimus', 'dokan') . ' ' . $store_min_order . '€'; ?>
+                                </li>
+                            <?php } ?>
 
                             <?php do_action( 'dokan_store_header_info_fields',  $store_user->get_id() ); ?>
                         </ul>

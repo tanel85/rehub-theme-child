@@ -8,6 +8,7 @@
                     $store_banner_id   = $vendor->get_banner_id();
                     $store_name        = $vendor->get_shop_name();
                     $store_biography   = $vendor->get_vendor_biography();
+                    $store_min_order   = $vendor->get_min_order();
                     $store_url         = $vendor->get_shop_url();
                     $store_banner_url  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, 'thumbnail' ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
 
@@ -45,11 +46,12 @@
                                         <div class="hidden-tag nasa-list-stock-wrap">
                                         </div>
                                         <div class="group-btn-in-list-wrap hidden-tag">
-                                            <div class="group-btn-in-list">
+                                            <div class="group-btn-in-list" style="padding-top: 25px;">
                                                 <div class="price-wrap">
-                                            <span class="price"><span class="woocommerce-Price-amount amount"><?php echo Store_Rating::init()->get_readable_rating( $seller->ID, true ); ?></span>
-                                            </span>
+                                                    <span class="price"><span class="woocommerce-Price-amount amount"><?php echo Store_Rating::init()->get_readable_rating( $seller->ID, true ); ?></span>
+                                                    </span>
                                                 </div>
+                                                <p><?php echo isset($store_min_order) ? __('Min. tellimus', 'dokan') . ' ' . $store_min_order . '€' : ' ' ?></p>
                                                 <div class="product-summary">
                                                     <div class="product-interactions">
                                                         <div class="add-to-cart-btn">
