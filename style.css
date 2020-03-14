@@ -50,6 +50,9 @@ Text Domain: elessi-theme-child
     .comecater-store-banner-large-screen {
         display: none;
     }
+    .product-category-select {
+        display: none;
+    }
 }
 
 @media (min-width: 52.96552em) {
@@ -70,6 +73,9 @@ Text Domain: elessi-theme-child
     }
     .comecater-store-banner-small-screen {
         display: none;
+    }
+    .seller-items {
+        display: flex;
     }
 }
 
@@ -225,4 +231,38 @@ Text Domain: elessi-theme-child
 a.invoice {
     background-color: inherit !important;
     padding: 5px;
+}
+
+.product-category {
+    display: inline-block;
+}
+
+.product-category::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #008400;
+    transition: width .3s;
+}
+
+.product-category:hover::after {
+    width: 100%;
+}
+
+.product-category:hover {
+    opacity: 0.8;
+}
+
+.product-category-selected {
+    font-weight: bold;
+}
+
+.product-category-selected::after {
+    width: 100%;
+    font-weight: bold;
+}
+
+.add_to_cart_text {
+    white-space: nowrap;
 }

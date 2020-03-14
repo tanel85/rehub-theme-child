@@ -36,7 +36,7 @@ if ( 'layout3' === $profile_layout ) {
 }
 
 ?>
-<div style="padding-bottom: 20px"><i class="arrow right"></i><a class="comecater-info-link" href="/stores">Tagasi otsingusse</a></div>
+<div style="padding-bottom: 20px"><a class="comecater-info-link" href="/stores"><i class="fa fa-long-arrow-left"></i> Tagasi otsingusse</a></div>
 <div class="profile-frame<?php echo esc_attr( $no_banner_class ); ?>">
 
     <div class="profile-info-box profile-layout-<?php echo esc_attr( $profile_layout ); ?>">

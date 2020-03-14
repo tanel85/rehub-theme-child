@@ -4,6 +4,7 @@ if (empty($product) || !$product->is_visible()) :
     return;
 endif;
 
+$category_ids = join(';', $product->get_category_ids());
 $productId = $product->get_id();
 $stock_status = $product->get_stock_status();
 $stock_label = $stock_status == 'outofstock' ?
@@ -26,7 +27,7 @@ if(!isset($_delay)) {
     $_delay = '0';
 }
 
-echo (!isset($wrapper) || $wrapper == 'li') ? '<li class="product-warp-item">' : '';
+echo (!isset($wrapper) || $wrapper == 'li') ? '<li class="product-warp-item" data-category-ids=";'.$category_ids.';">' : '';
 
 echo '<div class="' . esc_attr($class_wrap) . '" data-wow-duration="1s" data-wow-delay="' . esc_attr($_delay) . 'ms" data-wow="fadeInUp">';
 

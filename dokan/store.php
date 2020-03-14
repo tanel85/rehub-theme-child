@@ -70,16 +70,59 @@ if ( function_exists( 'yoast_breadcrumb' ) ) {
             <?php if ( have_posts() ) { ?>
 
                 <div class="seller-items">
+                    <div id="product-loop" style="min-width: 80%">
+                        <?php woocommerce_product_loop_start(); ?>
 
-                    <?php woocommerce_product_loop_start(); ?>
+                        <?php while ( have_posts() ) : the_post(); ?>
 
-                    <?php while ( have_posts() ) : the_post(); ?>
+                            <?php wc_get_template_part( 'content', 'product' ); ?>
 
-                        <?php wc_get_template_part( 'content', 'product' ); ?>
+                        <?php endwhile; // end of the loop. ?>
 
-                    <?php endwhile; // end of the loop. ?>
+                        <?php woocommerce_product_loop_end(); ?>
+                    </div>
 
-                    <?php woocommerce_product_loop_end(); ?>
+                    <?php
+                        $seller_id = $store_user->id;
+                        global $wpdb;
+                        $categories = get_transient( 'dokan-store-categories-'.$seller_id );
+
+                        if ( false === $categories ) {
+                            $categories = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id,t.name FROM $wpdb->terms as t
+                                LEFT JOIN $wpdb->term_taxonomy as tt on t.term_id = tt.term_id
+                                LEFT JOIN $wpdb->term_relationships AS tr on tt.term_taxonomy_id = tr.term_taxonomy_id
+                                LEFT JOIN $wpdb->posts AS p on tr.object_id = p.ID
+                                WHERE tt.taxonomy = 'product_cat'
+                                AND p.post_type = 'product'
+                                AND p.post_status = 'publish'
+                                AND p.post_author = %d
+                                GROUP BY t.term_id
+                                ORDER BY t.name ", $seller_id
+                            ) );
+                            set_transient( 'dokan-store-categories-'.$seller_id , $categories, 3600 );
+                        }
+                        if (!empty($categories)) {
+                        ?>
+                        <div class="product-category-select" style="padding-top: 20px; padding-left: 20px; min-width: 20%;">
+                            <div style="border: 1px solid #eeeeee; padding-left: 30px; padding-top: 20px; position: sticky; top: 0;">
+                                <h4>Kategooria</h4>
+                                <ul style="list-style: none">
+                                    <li style="margin-bottom: 2px;">
+                                        <a class="product-category product-category-selected" data-category-id="0" data-store="<?php echo $store_user->data->user_nicename ?>">
+                                            <span style="color: #008400">Kõik</span>
+                                        </a>
+                                    </li>
+                                    <?php foreach ($categories as $category) {?>
+                                        <li style="margin-bottom: 2px;">
+                                            <a class="product-category" data-category-id="<?php echo $category->term_id ?>" data-store="<?php echo $store_user->data->user_nicename ?>">
+                                                <span style="color: #008400"><?php echo $category->name ?></span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                     <?php } ?>
 
                 </div>
 
@@ -98,3 +141,24 @@ if ( function_exists( 'yoast_breadcrumb' ) ) {
     <?php do_action( 'woocommerce_after_main_content' ); ?>
 </div>
 <?php get_footer( 'shop' ); ?>
+<script>
+    jQuery( document ).ready( function ( $ ) {
+        $(".product-category").click(function() {
+            $(".product-category").each(function( index ) {
+                $( this ).removeClass("product-category-selected");
+            });
+            $( this ).addClass( "product-category-selected" );
+            var category_id = $(this).data('category-id');
+            $(".product-warp-item").each(function( index ) {
+                $( this ).removeClass("display_none");
+                var product_category_ids = $(this).data('category-ids');
+                if (category_id != '0' && !product_category_ids.includes(';'+category_id+';')) {
+                    $( this ).addClass( "display_none" );
+                }
+            });
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $(".seller-items").offset().top
+            }, 1000);
+        });
+    } );
+</script>

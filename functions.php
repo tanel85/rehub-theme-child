@@ -10,6 +10,13 @@ function enqueue_scripts() {
     wp_enqueue_style('jquery-ui',get_stylesheet_directory_uri().'/css/jquery-ui.css',array());
 }
 
+add_action( 'dokan_enqueue_scripts', 'enqueue_dokan_scripts', 31 );
+
+function enqueue_dokan_scripts() {
+    wp_enqueue_style( 'dokan-social-style' );
+    wp_enqueue_style( 'dokan-social-theme-flat' );
+}
+
 if ( ! class_exists( 'Dokan_Pro_Settings' ) ) {
 	require_once DOKAN_PRO_DIR . '/classes/settings.php';
 }
