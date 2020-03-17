@@ -28,7 +28,9 @@ if(!isset($_delay)) {
 }
 
 echo (!isset($wrapper) || $wrapper == 'li') ? '<li class="product-warp-item" data-category-ids=";'.$category_ids.';">' : '';
-
+if (!empty($product->category_name)) {
+    echo '<h1>' . $product->category_name . '</h1>';
+}
 echo '<div class="' . esc_attr($class_wrap) . '" data-wow-duration="1s" data-wow-delay="' . esc_attr($_delay) . 'ms" data-wow="fadeInUp">';
 
 do_action('woocommerce_before_shop_loop_item');

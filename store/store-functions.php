@@ -62,6 +62,8 @@ function set_custom_store_query_filter($query) {
     $author = get_query_var( $custom_store_url );
     if ( !is_admin() && $query->is_main_query() && ! empty( $author ) ) {
         set_query_var( 'posts_per_page', 10000 );
+        set_query_var( 'orderby', 'title' );
+        set_query_var( 'order', 'asc' );
     }
 
 }

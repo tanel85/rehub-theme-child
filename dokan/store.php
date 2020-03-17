@@ -68,41 +68,51 @@ if ( function_exists( 'yoast_breadcrumb' ) ) {
             <?php do_action( 'dokan_store_profile_frame_after', $store_user->data, $store_info ); ?>
 
             <?php if ( have_posts() ) { ?>
+                <?php
+                    $seller_id = $store_user->id;
+                    global $wpdb;
+                    $categories = get_transient( 'dokan-store-categories-'.$seller_id );
+
+                    if ( false === $categories ) {
+                        $categories = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id,t.name FROM $wpdb->terms as t
+                        LEFT JOIN $wpdb->term_taxonomy as tt on t.term_id = tt.term_id
+                        LEFT JOIN $wpdb->term_relationships AS tr on tt.term_taxonomy_id = tr.term_taxonomy_id
+                        LEFT JOIN $wpdb->posts AS p on tr.object_id = p.ID
+                        WHERE tt.taxonomy = 'product_cat'
+                        AND p.post_type = 'product'
+                        AND p.post_status = 'publish'
+                        AND p.post_author = %d
+                        GROUP BY t.term_id
+                        ORDER BY t.name ", $seller_id
+                    ) );
+                    set_transient( 'dokan-store-categories-'.$seller_id , $categories, 3600 );
+                    }
+                ?>
 
                 <div class="seller-items">
                     <div id="product-loop" style="min-width: 80%">
-                        <?php woocommerce_product_loop_start(); ?>
-
-                        <?php while ( have_posts() ) : the_post(); ?>
-
-                            <?php wc_get_template_part( 'content', 'product' ); ?>
-
-                        <?php endwhile; // end of the loop. ?>
-
-                        <?php woocommerce_product_loop_end(); ?>
+                        <?php
+                            woocommerce_product_loop_start();
+                            if (!empty($categories)) {
+                                foreach ($categories as $category) {
+                                    $category_header = $category->name;
+                                    while ( have_posts() ) : the_post();
+                                        global $product;
+                                        if (in_array($category->term_id, $product->get_category_ids())) {
+                                            if (!empty($category_header)) {
+                                                $product->category_name = $category_header;
+                                            }
+                                            wc_get_template_part('content', 'product');
+                                            $category_header=null;
+                                        }
+                                    endwhile;
+                                }
+                            }
+                            woocommerce_product_loop_end();
+                        ?>
                     </div>
 
-                    <?php
-                        $seller_id = $store_user->id;
-                        global $wpdb;
-                        $categories = get_transient( 'dokan-store-categories-'.$seller_id );
-
-                        if ( false === $categories ) {
-                            $categories = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id,t.name FROM $wpdb->terms as t
-                                LEFT JOIN $wpdb->term_taxonomy as tt on t.term_id = tt.term_id
-                                LEFT JOIN $wpdb->term_relationships AS tr on tt.term_taxonomy_id = tr.term_taxonomy_id
-                                LEFT JOIN $wpdb->posts AS p on tr.object_id = p.ID
-                                WHERE tt.taxonomy = 'product_cat'
-                                AND p.post_type = 'product'
-                                AND p.post_status = 'publish'
-                                AND p.post_author = %d
-                                GROUP BY t.term_id
-                                ORDER BY t.name ", $seller_id
-                            ) );
-                            set_transient( 'dokan-store-categories-'.$seller_id , $categories, 3600 );
-                        }
-                        if (!empty($categories)) {
-                        ?>
+                    <?php if (!empty($categories)) {?>
                         <div class="product-category-select" style="padding-top: 20px; padding-left: 20px; min-width: 20%;">
                             <div style="border: 1px solid #eeeeee; padding-left: 30px; padding-top: 20px; position: sticky; top: 0;">
                                 <h4>Kategooria</h4>
