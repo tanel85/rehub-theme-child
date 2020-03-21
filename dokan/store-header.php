@@ -69,7 +69,7 @@ if ( 'layout3' === $profile_layout ) {
                         <?php } ?>
 
                         <?php if ( ! empty( $store_user->get_vendor_biography() )) { ?>
-                            <?php echo $store_user->get_vendor_biography(); ?>
+                            <?php echo nl2br($store_user->get_vendor_biography()); ?>
                         <?php } ?>
                     </div>
                     <div class="profile-info-inner-second">

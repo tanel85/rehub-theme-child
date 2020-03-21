@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="info_main product-des-wrap">
                                                 <hr class="nasa-list-hr">
-                                                    <p><?php echo esc_html( $store_biography ); ?></p>
+                                                    <p><?php echo nl2br($store_biography) ?></p>
                                             </div>
                                         </div>
 

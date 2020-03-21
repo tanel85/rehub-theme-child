@@ -272,4 +272,10 @@ function add_login_logout_register_menu( $items, $args ) {
 
 add_filter( 'wp_nav_menu_items', 'add_login_logout_register_menu', 199, 2 );
 
+remove_filter ( 'the_content', 'wpautop' );
+add_filter ( 'the_content', 'add_newlines_to_post_content' );
+function add_newlines_to_post_content( $content ) {
+    return nl2br( $content );
+}
+
 ?>
