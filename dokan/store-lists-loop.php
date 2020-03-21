@@ -10,6 +10,7 @@
                     $store_biography   = $vendor->get_vendor_biography();
                     $store_min_order   = $vendor->get_min_order();
                     $store_url         = $vendor->get_shop_url();
+//                    $store_info        = dokan_get_store_info( $seller->ID ); // vajalik geolocationi jaoks
                     $store_banner_url  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, 'thumbnail' ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
 
                     $store_banner_url_mobile  = $store_banner_id ? wp_get_attachment_image_src( $store_banner_id, $image_size ) : DOKAN_PLUGIN_ASSEST . '/images/default-store-banner.png';
@@ -66,6 +67,7 @@
                             </div>
 
                         </div>
+<!--                        --><?php //do_action( 'dokan_seller_listing_footer_content', $seller, $store_info ); ?><!--vajalik geolocationi mapsi jaoks-->
                     </li>
 
                 <?php } ?>

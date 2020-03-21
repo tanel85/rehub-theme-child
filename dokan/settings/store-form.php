@@ -173,6 +173,20 @@ $min_reservation_time_closed          = isset( $profile_info['min_reservation_ti
 	?>
     <!--address-->
 
+<!--vajalik geolocationi mapsi jaoks-->
+<!--    <div class="dokan-form-group">-->
+<!--        <label class="dokan-w3 dokan-control-label" for="setting_map">--><?php //esc_html_e( 'Map', 'dokan-lite' ); ?><!--</label>-->
+<!---->
+<!--        <div class="dokan-w6 dokan-text-left">-->
+<!--            --><?php
+//            dokan_get_template( 'maps/dokan-maps-with-search.php', array(
+//                'map_location' => $map_location,
+//                'map_address'  => $map_address,
+//            ) );
+//            ?>
+<!--        </div> <!-- col.md-4 -->
+<!--    </div> <!-- .dokan-form-group -->
+
 
     <!--terms and conditions enable or not -->
 	<?php
