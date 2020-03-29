@@ -6,12 +6,12 @@ add_filter( 'woocommerce_shipping_rate_label', 'localize_shipping_rate_label' );
 add_filter( 'wcss_display_share_button', 'remove_button_class_from_share_button' );
 add_action( 'woocommerce_form_field_text','add_checkout_custom_headers', 10, 2 );
 add_action( 'woocommerce_form_field_textarea','add_checkout_custom_headers', 10, 2 );
-
-
+add_filter( 'woocommerce_package_rates', 'set_available_shipping_methods', 10, 2 );
 
 function default_values_checkout_fields( $fields ) {
     //TODO: siin saab aadressi kohustuslikkust dünaamiliselt muuta
     $fields['billing']['billing_delivery']['default'] = get_session_value('store_filter_delivery_option', '1');
+    $fields['billing']['billing_delivery']['class'][] = 'update_totals_on_change';
     $fields['billing']['billing_state']['required'] = 1;
     $fields['billing']['billing_delivery_date']['autocomplete'] = '';
 
@@ -84,6 +84,27 @@ function add_checkout_custom_headers( $field, $key ){
         }
     }
     return $field;
+}
+
+function set_available_shipping_methods($available_shipping_methods, $package) {
+    $post_data = post_data_to_array();
+    $local_pickup = isset($post_data['billing_delivery']) && $post_data['billing_delivery'] == '2';
+    foreach( $available_shipping_methods as $key => $value ) {
+        if (($local_pickup && strpos( $key, 'local_pickup' ) !== 0) || (!$local_pickup && strpos( $key, 'local_pickup' ) === 0 )) {
+            unset( $available_shipping_methods[ $key ] );
+        }
+    }
+    return $available_shipping_methods;
+}
+
+function post_data_to_array() {
+    $finalArray = array();
+    $asArr = explode( '&', wp_unslash($_POST['post_data']) );
+    foreach( $asArr as $val ){
+        $tmp = explode( '=', $val );
+        $finalArray[ $tmp[0] ] = $tmp[1];
+    }
+    return $finalArray;
 }
 
 ?>
